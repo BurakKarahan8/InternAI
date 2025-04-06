@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/InternAI/InternAI.iml" filepath="$PROJECT_DIR$/InternAI/InternAI.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/InternAI_BACKEND.iml" filepath="$PROJECT_DIR$/.idea/InternAI_BACKEND.iml" />
     </modules>
   </component>

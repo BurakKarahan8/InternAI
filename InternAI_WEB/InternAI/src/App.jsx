@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
+import LoginPage from './components/LoginPage';
+import SignUpPage from './components/SignUpPage';
 
 function App() {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    // Backend API'ye GET isteği gönderiyoruz
-    fetch('http://localhost:8080/internai/api/test')
-      .then(response => response.text())
-      .then(data => setMessage(data))
-      .catch(error => console.error('Error fetching data:', error));
-  }, []);
-
   return (
-    <div className="App">
-      <h1>{message ? message : 'Loading...'}</h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+      </Routes>
+    </Router>
   );
 }
 

@@ -8,10 +8,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**") // Tüm endpoint'lere izin verir
-                .allowedOrigins("http://localhost:5173/", "http://192.168.1.150:8080") // Frontend URL'sini burada belirtin
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // İzin verilen HTTP metodları
-                .allowedHeaders("*") // Tüm header'lara izin ver
-                .allowCredentials(true); // Cookie ile çalışıyorsanız true yapabilirsiniz
+        registry.addMapping("/**")
+                .allowedOrigins(
+                        //"http://localhost:5173", // Vite frontend
+                        // "http://192.168.196.159:8080" // Aynı frontend başka cihazdan erişim
+                        //"http://localhost:8080"  // (İsteğe bağlı) backend'e tarayıcıdan erişim
+                        "*"
+
+                )
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("*")
+                .allowCredentials(false);
     }
 }
