@@ -1,80 +1,96 @@
 package com.burakkarahan.InternAI.service;
 
 import com.burakkarahan.InternAI.model.User;
+import com.burakkarahan.InternAI.model.VerificationToken;
 import com.burakkarahan.InternAI.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.burakkarahan.InternAI.repository.VerificationTokenRepository;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+
     private final UserRepository userRepository;
+    private final VerificationTokenRepository tokenRepository;
+    private final EmailService emailService;
 
-    @Autowired  // constructor injection
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public void registerUser(User user) {
+        try {
+            // Kullanıcıyı kaydet
+            User savedUser = userRepository.save(user);
+
+            // Token oluştur
+            String token = UUID.randomUUID().toString();
+
+            VerificationToken verificationToken = VerificationToken.builder()
+                    .token(token)
+                    .user(savedUser)
+                    .expiryDate(LocalDateTime.now().plusHours(24)) // 24 saat geçerli
+                    .build();
+
+            tokenRepository.save(verificationToken);
+
+            // Doğrulama linkini oluştur
+            String verificationLink = "http://localhost:8080/api/users/verify?token=" + token;
+
+            // E-posta gönder
+            String to = user.getEmail();
+            String emailSubject = "Hesabınızı Doğrulayın";
+            String emailBody = "Hesabınızı doğrulamak için şu linke tıklayın: " + verificationLink;
+            emailService.sendEmail(to, emailSubject, emailBody);
+
+            // Doğrulama linki log
+            logger.info("Doğrulama linki: {}", verificationLink);
+
+        } catch (Exception e) {
+            // Hata logu
+            logger.error("Kullanıcı kaydederken bir hata oluştu: ", e);
+        }
     }
 
-    // ID'ye göre kullanıcıyı getir
-    public Optional<User> getUserById(UUID id) {
-        return userRepository.findById(id);
-    }
+    public void verifyUserEmail(String token) {
+        // Token'ı bul
+        VerificationToken verificationToken = tokenRepository.findByToken(token)
+                .orElseThrow(() -> new IllegalArgumentException("Geçersiz token"));
 
-    // Kullanıcı adına göre kullanıcıyı getir
-    public Optional<User> getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-
-    // E-posta adresine göre kullanıcıyı getir
-    public Optional<User> getUserByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
-
-    // Yeni kullanıcı oluştur
-    public User createUser(User user) {
-        return userRepository.save(user);
-    }
-
-    // Kullanıcı bilgilerini güncelle
-    public User updateUser(UUID id, User updatedUser) {
-        return userRepository.findById(id)
-                .map(user -> {
-                    if (updatedUser.getUsername() != null)
-                        user.setUsername(updatedUser.getUsername());
-                    if (updatedUser.getEmail() != null)
-                        user.setEmail(updatedUser.getEmail());
-                    if (updatedUser.getPassword() != null)
-                        user.setPassword(updatedUser.getPassword());
-                    if (updatedUser.getFullName() != null)
-                        user.setFullName(updatedUser.getFullName());
-                    if (updatedUser.getProfilePicture() != null)
-                        user.setProfilePicture(updatedUser.getProfilePicture());
-                    return userRepository.save(user);
-                })
-                .orElse(null);
-    }
-    // Kullanıcıyı sil
-    public void deleteUser(UUID id) {
-        userRepository.deleteById(id);
-    }
-
-    //login işlemi
-    public String loginUser(User loginRequest) {
-        Optional<User> userOptional = getUserByEmail(loginRequest.getEmail());
-
-        if (userOptional.isEmpty()) {
-            return "Kullanıcı bulunamadı.";
+        // Token süresi kontrolü
+        if (verificationToken.getExpiryDate().isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("Token süresi dolmuş.");
         }
 
-        User user = userOptional.get();
+        // Kullanıcıyı bul ve doğrulama işlemini gerçekleştir
+        User user = verificationToken.getUser();
+        user.setEmailVerified(true); // Kullanıcıyı onayla
+        userRepository.save(user); // Kullanıcıyı kaydet
 
-        if (!user.getPassword().equals(loginRequest.getPassword())) {
-            return "Şifre yanlış.";
+        // Kullanıcı onaylandığında log at
+        logger.info("Kullanıcı e-posta doğrulaması başarılı: {}", user.getEmail());
+    }
+
+    public String loginUser(String email, String password) {
+        // E-posta ile kullanıcıyı ara
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Bu e-posta adresiyle kayıtlı bir kullanıcı bulunamadı."));
+
+        // Şifre kontrolü (şifre hash'lenmişse burada ayrıca kontrol gerekir)
+        if (!user.getPassword().equals(password)) {
+            throw new IllegalArgumentException("Şifre yanlış.");
         }
 
-        return "Giriş başarılı!";
+        // E-posta doğrulama kontrolü
+        if (!user.isEmailVerified()) {
+            throw new IllegalArgumentException("E-posta adresiniz henüz doğrulanmamış.");
+        }
+
+        // Başarılı giriş
+        return user.getFullName();
     }
 }

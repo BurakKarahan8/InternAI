@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.mail-control-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    flex-direction: column;
+}
+
+.logo-container {
+    align-items: "center";
+    margin-bottom: 20px;
+}
+
+.logo-text {
+    font-size: 55px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.internText {
+    color: #f0b500;
+    font-style: italic;
+}
+
+.aiText {
+    color: #e2e2e2;
+}
+
+.tagline {
+    font-size: 20px;
+    color: #ffffff;
+    font-weight: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 20px;
+}
+
+.mail-control-box {
+    width: 100%;
+    max-width: 380px;
+    padding: 40px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.mail-control-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    background: #f1f1f1;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.input-icon {
+    font-size: 18px;
+    color: #667eea;
+    margin-right: 10px;
+}
+
+.mail-control-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 16px;
+}
+
+.mail-control-input::placeholder {
+    color: gray;
+    font-size: 14px;
+}
+
+.mail-control-button {
+    width: 100%;
+    padding: 12px;
+    background: #667eea;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+}
+
+.mail-control-footer {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+.mail-control-link {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.mail-control-link:hover {
+    text-decoration: underline;
+}

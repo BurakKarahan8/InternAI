@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./LoginPage.css";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaLock } from "react-icons/fa";
@@ -6,6 +6,7 @@ import { FaUser, FaLock } from "react-icons/fa";
 const LoginPage = () => {
   const [email, setEmail] = useState(""); // Kullanıcıdan alınan email
   const [password, setPassword] = useState(""); // Kullanıcıdan alınan şifre
+
   const navigate = useNavigate(); // React Router'dan yönlendirme için
 
   const handleLogin = async (e) => {
@@ -31,11 +32,12 @@ const LoginPage = () => {
 
       if (response.ok) {
         // Giriş başarılı
-        alert("Başarılı: Giriş başarılı!");
-        navigate("/signup"); // Giriş başarılı olduğunda yönlendirme yap
+        alert("Giriş başarılı. Hoş geldiniz, " + `${data}` +"!");
+
+        navigate("/main", {state: {userdata: data}}); // Giriş başarılı olduğunda yönlendirme yap
       } else {
         // Giriş başarısız
-        alert(`Hata: ${data.message || "Giriş başarısız."}`);
+        alert(`Hata: ${data}`);
       }
     } catch (error) {
       alert("Hata: Bir hata oluştu. Lütfen tekrar deneyin.");
@@ -47,7 +49,7 @@ const LoginPage = () => {
     <div className="login-container">
       <div className="login-box">
         <h2 className="login-title">Giriş Yap</h2>
-        <form className="login-form" onSubmit={handleLogin}>
+        <form onSubmit={handleLogin}>
           <div className="input-group">
             <FaUser className="input-icon" />
             <input
