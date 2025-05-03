@@ -1,10 +1,12 @@
 package com.burakkarahan.InternAI.controller;
 
+import com.burakkarahan.InternAI.dto.UserDTO;
 import com.burakkarahan.InternAI.service.UserService;
 import com.burakkarahan.InternAI.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/users")
@@ -30,12 +32,37 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
+    public ResponseEntity<UserDTO> login(@RequestBody User user) {
         try {
-            String result = userService.loginUser(user.getEmail(), user.getPassword());
-            return ResponseEntity.ok(result);
+            UserDTO userDTO = userService.loginUser(user.getEmail(), user.getPassword());
+            return ResponseEntity.ok(userDTO);  // Kullanıcı bilgilerini JSON olarak döndür
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(null);  // Hata durumunda null döndürüyoruz
         }
     }
+
+    // UserController.java
+    @PutMapping("/update")
+    public ResponseEntity<String> updateUser(@RequestBody User updatedUser) {
+        try {
+            userService.updateUser(updatedUser);
+            return ResponseEntity.ok("Bilgiler güncellendi.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Güncelleme sırasında bir hata oluştu.");
+        }
+    }
+
+    @PutMapping("/update-profile-picture")
+    public ResponseEntity<String> updateProfilePicture(@RequestParam("email") String email,
+                                                       @RequestParam("profilePicture") MultipartFile file) {
+        try {
+            userService.updateProfilePicture(email, file);
+            return ResponseEntity.ok("Profil fotoğrafınız başarıyla güncellendi.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Fotoğraf güncellenirken bir hata oluştu.");
+        }
+    }
+
+
+
 }

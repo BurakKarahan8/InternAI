@@ -1,0 +1,116 @@
+.user-profile-page {
+    background: linear-gradient(to bottom right, #667eea, #764ba2);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    box-sizing: border-box;
+  }
+  
+  .user-profile-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    margin: 50px;
+    min-height: 78vh;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    align-items: flex-start;
+  }
+  
+  .user-profile-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .user-profile-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .user-profile-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+  
+  .user-profile-username {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .user-profile-info {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 8px;
+  }
+  
+  .user-profile-section-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  /* Dil Progress Barları */
+  .user-profile-language-bar {
+    margin-bottom: 20px;
+  }
+  
+  .user-profile-language-label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #444;
+  }
+  
+  .progress-bar-container {
+    background-color: #ddd;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .progress-bar-fill {
+    background-color: #667eea;
+    height: 100%;
+    width: 0%;
+    transition: width 0.6s ease;
+    border-radius: 10px;
+  }
+  
+  @media (max-width: 500px) {
+    .user-profile-card {
+      flex-direction: column;
+      align-items: center;
+      min-height: 80vh;
+      margin: 20px;
+    }
+  
+    .user-profile-left,
+    .user-profile-right {
+      width: 100%;
+      align-items: center;
+      min-height: 35vh;
+    }
+  
+    .user-profile-right {
+      margin-top: 0px;
+    }
+  
+    .user-profile-language-label {
+      text-align: center;
+    }
+  }
+  

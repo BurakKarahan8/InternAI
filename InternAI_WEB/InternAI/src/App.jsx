@@ -5,6 +5,7 @@ import LoginPage from './components/LoginPage';
 import SignUpPage from './components/SignUpPage';
 import MailControlPage from './components/MailControlPage';
 import MainPage from './components/MainPage';
+import UserProfilePage from './components/UserProfilePage';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/signup" element={<SignUpPage/>} />
         <Route path="/mailcontrol" element={<MailControlPage/>} />
         <Route path="/main" element={<MainPage/>} />
+        <Route path="/user-profile" element={<UserProfilePage />} />
       </Routes>
     </Router>
   );

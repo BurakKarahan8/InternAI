@@ -17,7 +17,7 @@ const SignUpPage = ({ navigation }) => {
   const handleSignUp = () => {
     // Burada kayıt işlemi yapılabilir
     console.log("Kayıt Bilgileri:", form);
-    navigation.navigate("MainApp"); // Kayıt sonrası ana ekrana yönlendirme
+    navigation.navigate("Login"); // Kayıt sonrası login yönlendirme
   };
 
   return (

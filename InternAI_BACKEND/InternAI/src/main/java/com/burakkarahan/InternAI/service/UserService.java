@@ -1,5 +1,6 @@
 package com.burakkarahan.InternAI.service;
 
+import com.burakkarahan.InternAI.dto.UserDTO;
 import com.burakkarahan.InternAI.model.User;
 import com.burakkarahan.InternAI.model.VerificationToken;
 import com.burakkarahan.InternAI.repository.UserRepository;
@@ -8,8 +9,11 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.UUID;
 
 @Service
@@ -75,12 +79,12 @@ public class UserService {
         logger.info("Kullanıcı e-posta doğrulaması başarılı: {}", user.getEmail());
     }
 
-    public String loginUser(String email, String password) {
+    public UserDTO loginUser(String email, String password) {
         // E-posta ile kullanıcıyı ara
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Bu e-posta adresiyle kayıtlı bir kullanıcı bulunamadı."));
 
-        // Şifre kontrolü (şifre hash'lenmişse burada ayrıca kontrol gerekir)
+        // Şifre kontrolü
         if (!user.getPassword().equals(password)) {
             throw new IllegalArgumentException("Şifre yanlış.");
         }
@@ -90,7 +94,41 @@ public class UserService {
             throw new IllegalArgumentException("E-posta adresiniz henüz doğrulanmamış.");
         }
 
-        // Başarılı giriş
-        return user.getFullName();
+        // Profil fotoğrafını Base64'e çevirme
+        String profilePictureBase64 = user.getProfilePicture() != null
+                ? Base64.getEncoder().encodeToString(user.getProfilePicture())
+                : null;  // Eğer profil fotoğrafı yoksa null döndür
+
+        // Kullanıcı bilgilerini DTO'ya map et
+        return new UserDTO(user.getFullName(), user.getEmail(), profilePictureBase64, user.getUsername());
     }
+
+    // güncelleme işlemi
+    public void updateUser(User updatedUser) {
+        User existingUser = userRepository.findByEmail(updatedUser.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("Kullanıcı bulunamadı"));
+
+        existingUser.setFullName(updatedUser.getFullName());
+        existingUser.setPassword(updatedUser.getPassword()); // Eğer şifre de güncelleniyorsa
+
+        userRepository.save(existingUser);
+    }
+
+    public void updateProfilePicture(String email, MultipartFile file) throws IOException {
+        // Kullanıcıyı e-posta ile bul
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Kullanıcı bulunamadı"));
+
+        // Fotoğrafı byte[] formatına çevir
+        byte[] photoBytes = file.getBytes();
+
+        // Kullanıcıya fotoğrafı ata
+        user.setProfilePicture(photoBytes);
+
+        // Güncellenmiş kullanıcıyı kaydet
+        userRepository.save(user);
+    }
+
+
+
 }

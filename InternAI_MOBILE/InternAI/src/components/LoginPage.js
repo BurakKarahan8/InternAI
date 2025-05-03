@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { FontAwesome } from "@expo/vector-icons";
+import { useUser } from "./UserContext"; // UserContext'i import et
 
 const LoginPage = ({ navigation }) => {
   const [email, setEmail] = useState(""); // Kullanıcıdan alınan email
   const [password, setPassword] = useState(""); // Kullanıcıdan alınan şifre
+  const { setUser } = useUser(); // Kullanıcıyı ayarlamak için setUser fonksiyonu
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -14,7 +16,7 @@ const LoginPage = ({ navigation }) => {
     }
 
     try {
-      const response = await fetch("http://192.168.196.159:8080/api/users/login", {
+      const response = await fetch("http://192.168.147.159:8080/api/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -25,19 +27,33 @@ const LoginPage = ({ navigation }) => {
         }),
       });
 
-      const data = await response.text();
-
-      if (response.ok) {
-        // Giriş başarılı
-        Alert.alert("Başarılı", "Giriş başarılı!");
-        navigation.navigate("MainApp"); // Ana ekrana yönlendir
-      } else {
-        // Giriş başarısız
-        Alert.alert("Hata", data.message || "Giriş başarısız.");
+      if (!response.ok) {
+        throw new Error("Giriş başarısız. Lütfen tekrar deneyin.");
       }
+
+      const data = await response.json(); // Yanıtı JSON olarak al
+
+      // Kullanıcı verilerini context'e kaydet
+      setUser({
+        fullName: data.fullName,
+        email: data.email,
+        profilePicture: data.profilePicture,
+        username: data.username,
+      });
+
+      // Başarılı giriş
+      Alert.alert("Başarılı", "Giriş başarılı!");
+      navigation.navigate("MainApp");
     } catch (error) {
-      Alert.alert("Hata", "Bir hata oluştu. Lütfen tekrar deneyin.");
       console.error(error);
+
+      if (error.message === "Failed to fetch") {
+        // Sunucuya ulaşılamıyorsa
+        Alert.alert("Hata", "Sunucuya ulaşılamadı. Lütfen bağlantınızı kontrol edin.");
+      } else {
+        // Diğer hatalar
+        Alert.alert("Hata", error.message || "Bir hata oluştu. Lütfen tekrar deneyin.");
+      }
     }
   };
 

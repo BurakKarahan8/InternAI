@@ -21,13 +21,14 @@ public class BackendController {
         return "InternAI";
     }
 
-    @GetMapping("/languages/{owner}/{repo}")
-    public List<Language> getRepoLanguages(@PathVariable String owner, @PathVariable String repo) {
-        return githubService.getRepoLanguages(owner, repo);
+    //hangi dil yüzde kaç kullanılmış
+    @GetMapping("/github-languages/{owner}")
+    public List<Language> getUserLanguages(@PathVariable String owner) {
+        return githubService.getUserLanguages(owner);
     }
 
-    @GetMapping("/lines/{owner}/{repo}")
-    public int getTotalLinesOfCode(@PathVariable String owner, @PathVariable String repo) {
-        return githubService.getTotalLinesOfCode(owner, repo);
+    @GetMapping("/lines/{owner}")
+    public int getTotalLinesOfCode(@PathVariable String owner) {
+        return githubService.getTotalLinesOfCode(owner);
     }
 }
