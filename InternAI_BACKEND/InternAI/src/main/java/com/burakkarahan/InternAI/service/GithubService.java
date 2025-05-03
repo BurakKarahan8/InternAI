@@ -1,9 +1,9 @@
 package com.burakkarahan.InternAI.service;
 
 import com.burakkarahan.InternAI.model.Language;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -18,31 +18,28 @@ public class GithubService {
 
     private final WebClient webClient;
 
-    public GithubService(WebClient.Builder webClientBuilder) {
+    // Token'ı application.properties üzerinden alıyoruz
+    public GithubService(WebClient.Builder webClientBuilder,
+                         @Value("${github.token}") String githubToken) {
         this.webClient = webClientBuilder
                 .baseUrl(GITHUB_API_URL)
-                .defaultHeader("Authorization", "Bearer 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")  // Token'ı buraya ekliyoruz
+                .defaultHeader("Authorization", "Bearer " + githubToken)
                 .build();
     }
 
-    // Kullanıcının tüm reposundaki dillerin yüzdelik dağılımını al
     public List<Language> getUserLanguages(String owner) {
         String url = GITHUB_API_URL + "users/" + owner + "/repos";
-
         String response = webClient.get()
                 .uri(url)
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
 
-        if (response == null || response.isEmpty()) {
-            return new ArrayList<>();
-        }
+        if (response == null || response.isEmpty()) return new ArrayList<>();
 
         JSONArray repos = new JSONArray(response);
         List<Language> allLanguages = new ArrayList<>();
 
-        // Her repo için dillerin yüzdelik dağılımını al
         for (int i = 0; i < repos.length(); i++) {
             JSONObject repo = repos.getJSONObject(i);
             String repoName = repo.getString("name");
@@ -53,19 +50,15 @@ public class GithubService {
         return allLanguages;
     }
 
-    // Repo'daki dillerin yüzdelik dağılımını al
     public List<Language> getRepoLanguages(String owner, String repo) {
         String url = GITHUB_API_URL + "repos/" + owner + "/" + repo + "/languages";
-
         String response = webClient.get()
                 .uri(url)
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
 
-        if (response == null || response.isEmpty()) {
-            return new ArrayList<>();
-        }
+        if (response == null || response.isEmpty()) return new ArrayList<>();
 
         JSONObject json = new JSONObject(response);
         List<Language> languages = new ArrayList<>();
@@ -80,24 +73,19 @@ public class GithubService {
         return languages;
     }
 
-    // Kullanıcının tüm reposundaki toplam kod satır sayısını al
     public int getTotalLinesOfCode(String owner) {
         String url = GITHUB_API_URL + "users/" + owner + "/repos";
-
         String response = webClient.get()
                 .uri(url)
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
 
-        if (response == null || response.isEmpty()) {
-            return 0;
-        }
+        if (response == null || response.isEmpty()) return 0;
 
         JSONArray repos = new JSONArray(response);
         int totalLines = 0;
 
-        // Her repo için kod satırlarını topla
         for (int i = 0; i < repos.length(); i++) {
             JSONObject repo = repos.getJSONObject(i);
             String repoName = repo.getString("name");
@@ -107,19 +95,15 @@ public class GithubService {
         return totalLines;
     }
 
-    // Repo'daki toplam kod satırlarını al
     public int getTotalLinesOfCodeForRepo(String owner, String repo) {
         String url = GITHUB_API_URL + "repos/" + owner + "/" + repo + "/stats/code_frequency";
-
         String response = webClient.get()
                 .uri(url)
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
 
-        if (response == null || response.isEmpty()) {
-            return 0;
-        }
+        if (response == null || response.isEmpty()) return 0;
 
         try {
             if (response.startsWith("[")) {
@@ -128,7 +112,7 @@ public class GithubService {
 
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONArray weekData = jsonArray.getJSONArray(i);
-                    int addedLines = weekData.getInt(1); // Eklenen satır sayısı
+                    int addedLines = weekData.getInt(1);
                     totalLines += addedLines;
                 }
 
