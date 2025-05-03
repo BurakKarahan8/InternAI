@@ -18,9 +18,6 @@ public class GithubService {
 
     private final WebClient webClient;
 
-    @Value("${github.token}")
-    private String githubToken;
-
     public GithubService(WebClient.Builder webClientBuilder) {
         this.webClient = webClientBuilder
                 .baseUrl(GITHUB_API_URL)
