@@ -22,7 +22,7 @@ const MainPage = () => {
   return (
     <div className="gradient">
       <HeaderBar 
-      userData={userData} 
+      userData={userData} // Kullanıcı adını HeaderBar'a gönder
       toggleDrawer={toggleDrawer} 
       mainPage={true}
       />

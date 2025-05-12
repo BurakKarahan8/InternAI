@@ -1,0 +1,76 @@
+.landing-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to right, #667eea, #764ba2);
+  flex-direction: column;
+  text-align: center;
+  color: white;
+}
+
+.logoText {
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.internText {
+  color: #f0b500;
+  font-style: italic;
+}
+
+.aiText {
+  color: #e2e2e2;
+}
+
+.landing-content {
+  max-width: 600px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.landing-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.landing-description {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.landing-button {
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: 600;
+  background-color: #667eea;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.landing-button:hover {
+  background-color: #564fb1;
+}
+
+.company-button {
+  background-color: #f0b500;
+}
+
+.company-button:hover {
+  background-color: #c89f00;
+}

@@ -1,0 +1,129 @@
+/* Ana sayfa */
+.user-settings-page {
+    background: linear-gradient(to bottom right, #667eea, #764ba2);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    box-sizing: border-box;
+  }
+  
+  /* Profil ayarları kutusu */
+  .user-settings-container {
+    background-color: white;
+    padding: 40px 50px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    margin: 50px;
+    min-height: 78vh;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Form düzeni */
+  .user-settings-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .user-settings-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .user-settings-info-item{
+    display: flex;
+    flex-direction: row;
+  }
+  
+  /* Etiketler */
+  .user-settings-label {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+    line-height: 1.5;
+  }
+  
+  /* Input alanları */
+  .user-settings-form input {
+    font-size: 16px;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 50%;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Kaydet butonu */
+  .user-settings-save-button {
+    background-color: #667eea;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+  }
+  
+  .user-settings-save-button:hover {
+    background-color: #564bb5;
+  }
+  
+  /* Profil fotoğrafı */
+  .user-settings-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+  
+  /* Avatar konteyneri */
+  .user-settings-avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Yatayda avatar ile input arasına boşluk ekledim */
+  }
+  
+  /* Avatar için input alanı */
+  .user-settings-avatar-container input {
+    margin-top: 10px;
+    font-size: 14px;
+    padding: 8px;
+  }
+  
+  /* Mobil uyumlu düzen */
+  @media (max-width: 670px) {
+    .user-settings-container {
+      margin: 20px;
+      padding: 20px;
+      min-height: 80vh;
+    }
+  
+    .user-settings-form {
+      align-items: center;
+    }
+  
+    .user-settings-avatar-container {
+      margin-bottom: 20px;
+    }
+  
+    .user-settings-avatar {
+      width: 120px;
+      height: 120px;
+    }
+  }
+  

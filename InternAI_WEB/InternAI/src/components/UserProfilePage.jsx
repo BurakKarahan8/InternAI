@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation , useNavigate } from "react-router-dom";
 import axios from "axios";
 import HeaderBar from "../components/HeaderBar"; // HeaderBar'ı import ediyoruz
 import "./UserProfilePage.css";
 
 const UserProfilePage = () => {
   const location = useLocation();
+  const navigate = useNavigate(); // React Router'dan yönlendirme için
   const userData = location.state?.userdata || null;
   const [languages, setLanguages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,6 +32,10 @@ const UserProfilePage = () => {
     }
   }, [userData]);
 
+  const handleEditProfile = () => {
+    navigate("/user-settings", { state: { userdata: userData } });
+  };
+
   return (
     <div className="user-profile-page">
       {/* HeaderBar'ı burada ekliyoruz */}
@@ -40,14 +45,17 @@ const UserProfilePage = () => {
         {/* Sol Taraf */}
         <div className="user-profile-left">
           <img
-            src="https://i.pravatar.cc/150"
+            src={userData.profilePicture
+              ? `data:image/jpeg;base64,${userData.profilePicture}`
+              : "https://i.pravatar.cc/150"}
             alt="Profil"
             className="user-profile-avatar"
           />
-          <h2 className="user-profile-username">{userData}</h2>
-          <p className="user-profile-info">Stajyer</p>
-          <p className="user-profile-info">E-posta: ornek@eposta.com</p>
-          <p className="user-profile-info">Lokasyon: Türkiye</p>
+          <h2 className="user-profile-username">{userData.fullName}</h2>
+          <p className="user-profile-info">{userData.role || 'Stajyer'}</p>
+          <p className="user-profile-info">E-posta: {userData.email}</p>
+          <p className="user-profile-info">Lokasyon: {userData.location || 'Türkiye'}</p>
+          <button className="user-profile-settings-button" onClick={handleEditProfile}>Profili Düzenle</button>
         </div>
 
         {/* Sağ Taraf */}

@@ -29,7 +29,7 @@ const HeaderBar = ({ userData, toggleDrawer, userProfilePage, mainPage }) => {
                     <span className="internText">Intern</span>
                     <span className="aiText">AI</span>
                 </div>
-                <div className="userText">{userData}</div>
+                <div className="userText">{userData.fullName}</div>
             </div>
             <div style={{ display: "flex", alignItems: "center" }}>
                 <IconButton
@@ -64,10 +64,6 @@ const HeaderBar = ({ userData, toggleDrawer, userProfilePage, mainPage }) => {
                                 <Link
                                     to="/"
                                     className="drawer-link"
-                                    style={{
-                                        pointerEvents: userData ? "none" : "auto", // userData varsa tıklanamaz yap
-                                        color: userData ? "gray" : "white", // userData varsa gri renk
-                                    }}
                                 >
                                     Giriş Yap
                                 </Link>

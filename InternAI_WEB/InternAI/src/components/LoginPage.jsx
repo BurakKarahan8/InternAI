@@ -28,13 +28,13 @@ const LoginPage = () => {
         }),
       });
 
-      const data = await response.text();
+      const data = await response.json();
 
       if (response.ok) {
         // Giriş başarılı
-        alert("Giriş başarılı. Hoş geldiniz, " + `${data}` +"!");
+        alert("Giriş başarılı. Hoş geldiniz, " + `${data.fullName}` + "!");
 
-        navigate("/main", {state: {userdata: data}}); // Giriş başarılı olduğunda yönlendirme yap
+        navigate("/main", { state: { userdata: data } }); // Giriş başarılı olduğunda yönlendirme yap
       } else {
         // Giriş başarısız
         alert(`Hata: ${data}`);
@@ -47,6 +47,10 @@ const LoginPage = () => {
 
   return (
     <div className="login-container">
+      <div className="login-logoText">
+        <div className="login-internText">Intern</div>
+        <div className="login-aiText">AI</div>
+      </div>
       <div className="login-box">
         <h2 className="login-title">Giriş Yap</h2>
         <form onSubmit={handleLogin}>

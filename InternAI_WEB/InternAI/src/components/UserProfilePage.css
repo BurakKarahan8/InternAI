@@ -39,8 +39,8 @@
   }
   
   .user-profile-avatar {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     margin-bottom: 20px;
   }
@@ -63,10 +63,21 @@
     font-weight: bold;
     margin-bottom: 15px;
   }
+  .user-profile-settings-button{
+    margin-top: 50px;
+    background-color: #667eea;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
   
   /* Dil Progress Barları */
   .user-profile-language-bar {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
   
   .user-profile-language-label {
@@ -77,8 +88,9 @@
   
   .progress-bar-container {
     background-color: #ddd;
-    height: 20px;
-    border-radius: 10px;
+    height: 30px;
+    width: 350px;
+    border-radius: 15px;
     overflow: hidden;
   }
   
@@ -87,10 +99,10 @@
     height: 100%;
     width: 0%;
     transition: width 0.6s ease;
-    border-radius: 10px;
+    border-radius: 15px;
   }
   
-  @media (max-width: 500px) {
+  @media (max-width: 670px) {
     .user-profile-card {
       flex-direction: column;
       align-items: center;
@@ -111,6 +123,9 @@
   
     .user-profile-language-label {
       text-align: center;
+    }
+    .progress-bar-container {
+      width: 100%;
     }
   }
   

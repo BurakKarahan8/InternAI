@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class GithubService {
@@ -38,16 +40,32 @@ public class GithubService {
         if (response == null || response.isEmpty()) return new ArrayList<>();
 
         JSONArray repos = new JSONArray(response);
-        List<Language> allLanguages = new ArrayList<>();
+        Map<String, Double> languageTotals = new HashMap<>();
 
         for (int i = 0; i < repos.length(); i++) {
             JSONObject repo = repos.getJSONObject(i);
             String repoName = repo.getString("name");
             List<Language> repoLanguages = getRepoLanguages(owner, repoName);
-            allLanguages.addAll(repoLanguages);
+
+            for (Language lang : repoLanguages) {
+                languageTotals.put(
+                        lang.getName(),
+                        languageTotals.getOrDefault(lang.getName(), 0.0) + lang.getPercentage()
+                );
+            }
         }
 
-        return allLanguages;
+        // Toplam tüm dillerin oranı
+        double totalPercentage = languageTotals.values().stream().mapToDouble(Double::doubleValue).sum();
+
+        // Normalize edilmiş sonuç listesi
+        List<Language> result = new ArrayList<>();
+        for (Map.Entry<String, Double> entry : languageTotals.entrySet()) {
+            double normalizedPercentage = (entry.getValue() / totalPercentage) * 100.0;
+            result.add(new Language(entry.getKey(), normalizedPercentage));
+        }
+
+        return result;
     }
 
     public List<Language> getRepoLanguages(String owner, String repo) {
