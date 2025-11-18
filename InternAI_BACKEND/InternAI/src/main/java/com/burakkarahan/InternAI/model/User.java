@@ -28,6 +28,9 @@ public class User {
     @Column(name = "email", nullable = false, unique = true, length = 100)
     private String email;
 
+    @Column(name = "github_username", nullable = false, unique = true)
+    private String githubUsername;
+
     @Column(name = "password", nullable = false)
     private String password;
 

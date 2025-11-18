@@ -79,6 +79,7 @@ public class CompanyService {
         }
 
         return CompanyDTO.builder()
+                .companyId(company.getCompanyId())
                 .companyName(company.getCompanyName())
                 .companyUsername(company.getCompanyUsername())
                 .companyEmail(company.getCompanyEmail())

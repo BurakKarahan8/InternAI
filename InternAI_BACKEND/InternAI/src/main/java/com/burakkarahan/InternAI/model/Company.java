@@ -52,4 +52,6 @@ public class Company {
 
     @Column(name = "email_verified", nullable = false)
     private boolean emailVerified;
+
+
 }

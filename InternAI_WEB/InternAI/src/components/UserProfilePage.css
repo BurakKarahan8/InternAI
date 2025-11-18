@@ -1,131 +1,220 @@
-.user-profile-page {
-    background: linear-gradient(to bottom right, #667eea, #764ba2);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 50px 0;
-    box-sizing: border-box;
-  }
-  
+/* UserProfilePage.css */
+.user-profile-page-wrapper { /* Yeni dış sarmalayıcı */
+  min-height: 100vh;
+  background: linear-gradient(135deg, #283958, #4b6cb7);
+  display: flex;
+  flex-direction: column; /* Header ve içerik için */
+  align-items: center;
+  padding-top: 70px; /* HeaderBar için */
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  color: #E0E0E0;
+}
+
+.user-profile-card {
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 30px 40px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  width: 100%;
+  max-width: 1200px; /* Daha geniş olabilir */
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column; /* Mobil için alt alta */
+  gap: 30px; /* Bölümler arası boşluk */
+  align-items: stretch; /* Bölümlerin genişliğini eşitle */
+}
+
+@media (min-width: 768px) { /* Tablet ve üzeri için yan yana */
   .user-profile-card {
-    background-color: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    margin: 50px;
-    min-height: 78vh;
-    height: auto;
-    display: flex;
     flex-direction: row;
-    gap: 40px;
-    align-items: flex-start;
   }
-  
-  .user-profile-left {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .user-profile-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  .user-profile-avatar {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-  }
-  
-  .user-profile-username {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .user-profile-info {
+}
+
+.user-profile-left,
+.user-profile-right {
+  flex: 1; /* Eşit genişlik */
+  display: flex;
+  flex-direction: column;
+  padding: 15px; /* İç boşluk */
+}
+
+.user-profile-left {
+  align-items: center; /* Avatarı ve metinleri ortala */
+  border-right: none; /* Dikey ayırıcı mobil için kalksın */
+}
+@media (min-width: 768px) {
+    .user-profile-left {
+        border-right: 1px solid rgba(255,255,255,0.1); /* Geniş ekranda ayırıcı */
+        padding-right: 30px;
+        margin-right: -15px; /* Padding'i dengelemek için */
+    }
+}
+
+
+.user-profile-avatar {
+  width: 150px; /* Biraz daha büyük avatar */
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  border: 4px solid #82E0AA; /* Mobil tema vurgu */
+  object-fit: cover; /* Resmin orantısını koru */
+}
+
+.user-profile-fullName { /* .user-profile-username yerine */
+  font-size: 26px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 5px;
+  text-align: center;
+}
+.user-profile-username-display { /* @username için */
     font-size: 16px;
-    color: #666;
-    margin-bottom: 8px;
-  }
-  
-  .user-profile-section-title {
-    font-size: 24px;
-    font-weight: bold;
+    color: #B0B0B0;
     margin-bottom: 15px;
-  }
-  .user-profile-settings-button{
-    margin-top: 50px;
-    background-color: #667eea;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  /* Dil Progress Barları */
-  .user-profile-language-bar {
-    margin-bottom: 30px;
-  }
-  
-  .user-profile-language-label {
-    font-size: 16px;
-    margin-bottom: 5px;
-    color: #444;
-  }
-  
-  .progress-bar-container {
-    background-color: #ddd;
-    height: 30px;
-    width: 350px;
-    border-radius: 15px;
-    overflow: hidden;
-  }
-  
-  .progress-bar-fill {
-    background-color: #667eea;
-    height: 100%;
-    width: 0%;
-    transition: width 0.6s ease;
-    border-radius: 15px;
-  }
-  
-  @media (max-width: 670px) {
-    .user-profile-card {
-      flex-direction: column;
-      align-items: center;
-      min-height: 80vh;
-      margin: 20px;
+    text-align: center;
+}
+
+.user-profile-info {
+  font-size: 15px;
+  color: #B0B0B0;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  width: 100%; /* Tam genişlik */
+  max-width: 300px; /* Maksimum genişlik info satırları için */
+}
+.user-profile-info svg {
+    margin-right: 10px;
+    font-size: 18px;
+    color: #82E0AA;
+    min-width: 20px; /* İkonlar için sabit genişlik */
+}
+ .user-profile-info strong {
+    color: #E0E0E0;
+    font-weight: 500;
+    margin-right: 5px;
+}
+
+
+.profile-buttons-container { /* Butonları saran div */
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column; /* Mobil için alt alta */
+    align-items: center; /* Ortala */
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 380px;
+}
+ @media (min-width: 400px) { /* Biraz daha geniş ekranlarda yan yana sığarsa */
+    .profile-buttons-container {
+        flex-direction: row;
     }
-  
-    .user-profile-left,
-    .user-profile-right {
-      width: 100%;
-      align-items: center;
-      min-height: 35vh;
-    }
-  
-    .user-profile-right {
-      margin-top: 0px;
-    }
-  
-    .user-profile-language-label {
-      text-align: center;
-    }
-    .progress-bar-container {
-      width: 100%;
-    }
-  }
-  
+}
+
+
+.user-profile-action-button { /* Ortak buton stili */
+  background-color: #82E0AA;
+  color: #1D2B4A;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none; /* Link ise */
+  box-shadow: 0 2px 4px rgba(130, 224, 170, 0.2);
+}
+.user-profile-action-button svg {
+    margin-right: 8px;
+}
+.user-profile-action-button:hover {
+  background-color: #6cc091;
+  transform: translateY(-2px);
+}
+/* Farklı buton renkleri istenirse .user-profile-settings-button, .user-profile-applications-button gibi ayrılabilir */
+.user-profile-applications-button {
+    background-color: transparent;
+    border: 1px solid #82E0AA;
+    color: #82E0AA;
+}
+.user-profile-applications-button:hover {
+    background-color: rgba(130, 224, 170, 0.1);
+    color: #92f0ba; /* Hover'da biraz daha parlak */
+}
+
+
+.user-profile-right {
+  padding-left: 15px; /* Soldan boşluk */
+}
+@media (min-width: 768px) {
+     .user-profile-right {
+        padding-left: 30px; /* Geniş ekranda daha fazla boşluk */
+     }
+}
+
+.user-profile-section-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.user-profile-languages-bars {
+    width: 100%;
+}
+.user-profile-language-bar {
+  margin-bottom: 18px;
+}
+
+.language-header { /* Dil adı ve yüzdeyi yan yana getirmek için */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+.user-profile-language-name { /* .user-profile-language-label yerine */
+  font-size: 15px;
+  color: #E0E0E0;
+  font-weight: 500;
+}
+.user-profile-language-percentage {
+    font-size: 14px;
+    color: #B0B0B0;
+}
+
+.progress-bar-container {
+  background-color: rgba(255, 255, 255, 0.1); /* Koyu tema için uygun arka plan */
+  height: 10px; /* Daha ince progress bar */
+  border-radius: 5px;
+  overflow: hidden;
+  width: 100%; /* Tam genişlik */
+}
+
+.progress-bar-fill {
+  /* background-color: #82E0AA; Mobil tema vurgu */ /* Renk JS'den dinamik gelecek */
+  height: 100%;
+  width: 0%; /* JS ile ayarlanacak */
+  transition: width 0.8s ease-in-out;
+  border-radius: 5px;
+}
+
+.loading-languages-msg, .error-languages-msg, .no-languages-msg {
+    text-align: center;
+    color: #B0B0B0;
+    font-style: italic;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loading-languages-msg svg { margin-right: 10px; }

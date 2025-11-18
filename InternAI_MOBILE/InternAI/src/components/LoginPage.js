@@ -1,108 +1,144 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  ActivityIndicator
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { FontAwesome } from "@expo/vector-icons";
-import { useUser } from "./UserContext"; // UserContext'i import et
+import { FontAwesome, Ionicons } from "@expo/vector-icons"; // Ionicons ekledim
+import { useUser } from "./UserContext";
+import { API_BASE_URL } from '@env';
 
 const LoginPage = ({ navigation }) => {
-  const [email, setEmail] = useState(""); // Kullanıcıdan alınan email
-  const [password, setPassword] = useState(""); // Kullanıcıdan alınan şifre
-  const { setUser } = useUser(); // Kullanıcıyı ayarlamak için setUser fonksiyonu
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false); // Yükleme durumu için state
+  const { setUser } = useUser();
 
   const handleLogin = async () => {
     if (!email || !password) {
-      Alert.alert("Hata", "Lütfen tüm alanları doldurun.");
+      Alert.alert("Eksik Bilgi", "Lütfen e-posta ve şifrenizi girin.");
       return;
     }
-
+    setLoading(true);
     try {
-      const response = await fetch("http://192.168.147.159:8080/api/users/login", {
+      console.log(API_BASE_URL); 
+      const response = await fetch(`${API_BASE_URL}/api/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
+        body: JSON.stringify({ email, password }),
       });
 
+      const data = await response.json(); // Yanıtı her zaman JSON olarak almayı dene
+
       if (!response.ok) {
-        throw new Error("Giriş başarısız. Lütfen tekrar deneyin.");
+        throw new Error(data.message || "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.");
       }
 
-      const data = await response.json(); // Yanıtı JSON olarak al
-
-      // Kullanıcı verilerini context'e kaydet
       setUser({
+        id: data.id,
         fullName: data.fullName,
         email: data.email,
         profilePicture: data.profilePicture,
         username: data.username,
+        githubUsername: data.githubUsername,
       });
 
-      // Başarılı giriş
-      Alert.alert("Başarılı", "Giriş başarılı!");
-      navigation.navigate("MainApp");
+      // Alert.alert("Başarılı", "Giriş başarılı!"); // Otomatik yönlendirme olduğu için bu alert'e gerek kalmayabilir
+      navigation.replace("MainApp"); // Geri dönülememesi için replace kullan
     } catch (error) {
-      console.error(error);
-
-      if (error.message === "Failed to fetch") {
-        // Sunucuya ulaşılamıyorsa
-        Alert.alert("Hata", "Sunucuya ulaşılamadı. Lütfen bağlantınızı kontrol edin.");
-      } else {
-        // Diğer hatalar
-        Alert.alert("Hata", error.message || "Bir hata oluştu. Lütfen tekrar deneyin.");
-      }
+      console.error("Login Error:", error);
+      Alert.alert(
+        "Giriş Hatası",
+        error.message.includes("Network request failed") || error.message.includes("Failed to fetch")
+          ? "Sunucuya ulaşılamadı. İnternet bağlantınızı kontrol edin."
+          : error.message || "Bir hata oluştu. Lütfen tekrar deneyin."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <LinearGradient colors={["#667eea", "#764ba2"]} style={styles.background}>
-      <View style={styles.container}>
-        <View style={styles.logoContainer}>
-          <Text style={styles.logoText}>
-            <Text style={styles.internText}>Intern</Text>
-            <Text style={styles.aiText}>AI</Text>
-          </Text>
-          <Text style={styles.tagline}>Staj aramanın akıllı yolu</Text>
-        </View>
-        <View style={styles.loginBox}>
-          <View style={styles.inputGroup}>
-            <FontAwesome name="user" size={18} color="#667eea" style={styles.icon} />
-            <TextInput
-              style={styles.input}
-              placeholder="Emailinizi girin"
-              placeholderTextColor="#666"
-              value={email}
-              onChangeText={setEmail} // Email state'ini güncelle
-            />
+    <LinearGradient colors={['#1D2B4A', '#3A506B']} style={styles.background}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+      >
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <View style={styles.container}>
+            <View style={styles.logoContainer}>
+              <Text style={styles.logoText}>
+                <Text style={styles.internText}>Intern</Text>
+                <Text style={styles.aiText}>AI</Text>
+              </Text>
+              <Text style={styles.tagline}>Staj aramanın akıllı yolu</Text>
+            </View>
+
+            <View style={styles.formBox}>
+              <Text style={styles.formTitle}>Giriş Yap</Text>
+              <View style={styles.inputGroup}>
+                <Ionicons name="mail-outline" size={22} color="#82E0AA" style={styles.icon} />
+                <TextInput
+                  style={styles.input}
+                  placeholder="E-posta adresiniz"
+                  placeholderTextColor="#A0AEC0"
+                  value={email}
+                  onChangeText={setEmail}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                />
+              </View>
+
+              <View style={styles.inputGroup}>
+                <Ionicons name="lock-closed-outline" size={22} color="#82E0AA" style={styles.icon} />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Şifreniz"
+                  placeholderTextColor="#A0AEC0"
+                  secureTextEntry
+                  value={password}
+                  onChangeText={setPassword}
+                />
+              </View>
+
+              <TouchableOpacity
+                style={[styles.button, loading && styles.buttonDisabled]}
+                onPress={handleLogin}
+                disabled={loading}
+              >
+                {loading ? (
+                  <ActivityIndicator size="small" color="#FFFFFF" />
+                ) : (
+                  <Text style={styles.buttonText}>Giriş Yap</Text>
+                )}
+              </TouchableOpacity>
+
+              {/* <TouchableOpacity onPress={() => Alert.alert("Şifremi Unuttum", "Bu özellik yakında eklenecektir.")} style={{marginTop: 15}}>
+                 <Text style={styles.forgotPasswordText}>Şifreni mi unuttun?</Text>
+              </TouchableOpacity> */}
+
+              <View style={styles.footerContainer}>
+                <Text style={styles.footerText}>
+                  Hesabın yok mu?{" "}
+                </Text>
+                <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+                  <Text style={styles.link}>Hemen Kaydol</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
-
-          <View style={styles.inputGroup}>
-            <FontAwesome name="lock" size={18} color="#667eea" style={styles.icon} />
-            <TextInput
-              style={styles.input}
-              placeholder="Şifrenizi girin"
-              placeholderTextColor="#666"
-              secureTextEntry
-              value={password}
-              onChangeText={setPassword} // Password state'ini güncelle
-            />
-          </View>
-
-          <TouchableOpacity style={styles.button} onPress={handleLogin}>
-            <Text style={styles.buttonText}>Giriş Yap</Text>
-          </TouchableOpacity>
-
-          <Text style={styles.footerText}>
-            Hesabınız yok mu?{" "}
-            <Text style={styles.link} onPress={() => navigation.navigate("SignUp")}>
-              Kaydol
-            </Text>
-          </Text>
-        </View>
-      </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </LinearGradient>
   );
 };
@@ -110,59 +146,67 @@ const LoginPage = ({ navigation }) => {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
+  },
+  scrollContainer: {
+    flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
+    paddingVertical: 20,
   },
   container: {
-    width: "100%",
+    width: "90%",
+    maxWidth: 400,
     alignItems: "center",
   },
   logoContainer: {
     alignItems: "center",
-    marginBottom: 20, // LoginBox ile boşluk
+    marginBottom: 30,
   },
   logoText: {
-    fontSize: 65, // SVG'deki font-size
-    fontWeight: "bold", // SVG'deki font-weight
-    fontFamily: "Arial", // SVG'deki font-family
-    textAlign: "center",
+    fontSize: Platform.OS === 'ios' ? 70 : 65,
+    fontWeight: "bold",
+    fontFamily: Platform.OS === "ios" ? "Arial" : "sans-serif-condensed", // Platforma özel font
   },
   internText: {
-    color: "#f0b500", // Intern kısmının rengi
-    fontStyle: "italic", // SVG'deki font-style
+    color: "#f0b500",
+    fontStyle: "italic",
   },
   aiText: {
-    color: "#e2e2e2", // AI kısmının rengi
+    color: "#E0E0E0", // Daha açık bir AI metni
   },
   tagline: {
-    fontSize: 20, // SVG'deki tagline font-size
-    fontWeight: "normal",
-    fontFamily: "Arial",
-    color: "#ffffff",
-    marginTop: 5,
+    fontSize: Platform.OS === 'ios' ? 18 : 16,
+    color: "#B0B0B0",
+    marginTop: 8,
   },
-  loginBox: {
-    paddingTop: 60,
-    padding: 30,
-    backgroundColor: "white",
-    borderRadius: 12,
-    marginHorizontal: 30,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
-    elevation: 5,
+  formBox: {
+    width: "100%",
+    backgroundColor: "rgba(255, 255, 255, 0.08)", // Hafif şeffaf beyaz
+    borderRadius: 15,
+    paddingHorizontal: 25,
+    paddingVertical: 40,
     alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    elevation: 5, // Android için gölge
+  },
+  formTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    marginBottom: 25,
   },
   inputGroup: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#f1f1f1",
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+    backgroundColor: "rgba(255, 255, 255, 0.15)",
+    borderRadius: 12,
+    paddingHorizontal: 15,
     width: "100%",
-    marginBottom: 15,
+    marginBottom: 18,
+    height: 55,
   },
   icon: {
     marginRight: 10,
@@ -170,29 +214,49 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 16,
-    color: "#333",
+    color: "#FFFFFF",
   },
   button: {
-    width: 100,
-    paddingVertical: 12,
-    backgroundColor: "#5f4857",
-    borderRadius: 8,
+    width: "100%",
+    paddingVertical: 15,
+    backgroundColor: "#82E0AA", // Tema rengi
+    borderRadius: 12,
     alignItems: "center",
     marginTop: 10,
+    shadowColor: "#82E0AA",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.4,
+    shadowRadius: 5,
+    elevation: 3,
+  },
+  buttonDisabled: {
+    backgroundColor: "#A0AEC0",
   },
   buttonText: {
-    color: "white",
-    fontSize: 16,
+    color: "#1D2B4A", // Koyu ana renk
+    fontSize: 17,
     fontWeight: "bold",
+  },
+  forgotPasswordText: {
+    color: '#B0B0B0',
+    fontSize: 14,
+    textDecorationLine: 'underline',
+  },
+  footerContainer: {
+    marginTop: 25,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   footerText: {
-    marginTop: 15,
-    fontSize: 14,
-    color: "#666",
+    fontSize: 15,
+    color: "#B0B0B0", // Biraz daha açık gri
   },
   link: {
-    color: "#667eea",
+    color: "#82E0AA", // Tema rengi
     fontWeight: "bold",
+    fontSize: 15,
+    marginLeft: 5,
   },
 });
 

@@ -100,7 +100,7 @@ public class UserService {
                 : null;  // Eğer profil fotoğrafı yoksa null döndür
 
         // Kullanıcı bilgilerini DTO'ya map et
-        return new UserDTO(user.getFullName(), user.getEmail(), profilePictureBase64, user.getUsername());
+        return new UserDTO(user.getId(), user.getFullName(), user.getEmail(), profilePictureBase64, user.getUsername(), user.getGithubUsername());
     }
 
     // güncelleme işlemi
@@ -109,7 +109,7 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("Kullanıcı bulunamadı"));
 
         existingUser.setFullName(updatedUser.getFullName());
-        existingUser.setPassword(updatedUser.getPassword()); // Eğer şifre de güncelleniyorsa
+        existingUser.setPassword(updatedUser.getPassword());
 
         userRepository.save(existingUser);
     }

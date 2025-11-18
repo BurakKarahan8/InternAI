@@ -1,22 +1,33 @@
+/* LoginPage.css (Kullanıcı ve Şirket Girişi için Ortak) */
 .login-container {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(to right, #667eea, #764ba2);
+  background: linear-gradient(135deg, #283958, #4b6cb7);
   flex-direction: column;
+  padding: 20px;
+  /* Mobil için padding */
+}
+
+.login-logoText-wrapper {
+  /* Logoyu sarmalayan div */
+  display: flex;
+  /* Tagline ile logoyu alt alta getirmek için */
+  flex-direction: column;
+  /* Alt alta */
+  align-items: center;
+  /* Kendi içindeki çocukları (logo ve tagline) ortalar */
+  margin-bottom: 30px;
+  /* Veya signup-logoText-wrapper için 25px */
 }
 
 .login-logoText {
-  font-size: 40px;
+  font-size: clamp(40px, 10vw, 65px);
   font-weight: bold;
   text-align: center;
-  margin-bottom: 40px;
-  color: white;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
+  font-family: 'Arial', sans-serif-condensed;
 }
 
 .login-internText {
@@ -25,38 +36,67 @@
 }
 
 .login-aiText {
-  color: #e2e2e2;
+  color: #E0E0E0;
+}
+
+.login-tagline {
+  /* Mobilden gelen tagline */
+  font-size: clamp(16px, 3vw, 18px);
+  color: #B0B0B0;
+  text-align: center;
+  margin-top: 8px;
 }
 
 .login-box {
   width: 100%;
-  max-width: 380px;
-  padding: 40px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  /* Biraz daha geniş form */
+  padding: 30px 35px;
+  /* YENİ: Hafif şeffaf kart */
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  /* Daha yuvarlak köşeler */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
   text-align: center;
 }
 
 .login-title {
-  font-size: 28px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 40px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #FFFFFF;
+  /* Beyaz başlık */
+  margin-bottom: 30px;
 }
 
 .input-group {
   display: flex;
   align-items: center;
-  background: #f1f1f1;
-  border-radius: 8px;
-  padding: 10px;
+  /* YENİ: Mobil benzeri input arka planı */
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  /* Daha yuvarlak input */
   margin-bottom: 20px;
+  height: 55px;
+  /* Sabit yükseklik */
+  border: 1px solid transparent;
+  /* Focus için yer */
+  transition: border-color 0.3s ease;
+}
+
+.input-group:focus-within {
+  /* Input focus olduğunda çerçeve */
+  border-color: #82E0AA;
+  /* Mobil temadaki vurgu rengi */
 }
 
 .input-icon {
-  font-size: 18px;
-  color: #667eea;
+  font-size: 22px;
+  /* Biraz daha büyük ikon */
+  color: #82E0AA;
+  /* Mobil tema vurgu rengi */
+  margin-left: 15px;
+  /* İkon için sol boşluk */
   margin-right: 10px;
 }
 
@@ -66,36 +106,59 @@
   outline: none;
   background: none;
   font-size: 16px;
+  color: #ffffff;
+  padding-right: 15px;
+}
+
+.login-input::placeholder {
+  color: #d3d3d3;
+  /* Mobildeki placeholder rengi */
 }
 
 .login-button {
   width: 100%;
-  padding: 12px;
-  background: #667eea;
-  color: white;
-  font-size: 16px;
+  padding: 15px;
+  /* YENİ: Mobil tema butonu */
+  background-color: #82E0AA;
+  color: #1D2B4A;
+  /* Koyu metin rengi */
+  font-size: 17px;
   font-weight: bold;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
   margin-top: 10px;
+  box-shadow: 0 3px 5px rgba(130, 224, 170, 0.3);
 }
 
 .login-button:hover {
-  background: #564fb1;
+  background-color: #6cc091;
+  transform: translateY(-2px);
+}
+
+.login-button:disabled {
+  /* Yükleme durumu için */
+  background-color: #A0AEC0;
+  cursor: not-allowed;
 }
 
 .login-footer {
-  margin-top: 15px;
-  font-size: 14px;
-  color: #666;
+  margin-top: 25px;
+  font-size: 15px;
+  color: #B0B0B0;
+  display: flex;
+  /* Yan yana hizalamak için */
+  justify-content: center;
+  align-items: center;
 }
 
 .signup-link {
-  color: #667eea;
+  /* Linkler için ortak stil */
+  color: #82E0AA;
   text-decoration: none;
   font-weight: bold;
+  margin-left: 5px;
 }
 
 .signup-link:hover {

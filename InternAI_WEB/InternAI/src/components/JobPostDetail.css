@@ -1,0 +1,213 @@
+/* JobPostDetail.css */
+.jobpost-detail-page-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #283958, #4b6cb7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 70px; /* HeaderBar için */
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  color: #E0E0E0;
+}
+
+.jobpost-container {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 15px;
+  padding: 30px 40px;
+  width: 100%;
+  max-width: 750px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  margin-top: 30px;
+}
+
+.jobpost-container h2, .jobpost-container h3 {
+  margin-bottom: 20px;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+.jobpost-container h2 { font-size: 24px; }
+.jobpost-container h3 { font-size: 20px; margin-top: 30px; }
+
+.jobpost-form-field {
+    margin-bottom: 20px; /* Input grupları arası boşluk artırıldı */
+}
+.jobpost-form-field label {
+    display: block;
+    color: #B0B0B0;
+    font-size: 15px; /* Label font boyutu artırıldı */
+    margin-bottom: 8px; /* Label ve input arası boşluk artırıldı */
+    font-weight: 500; /* Label biraz daha belirgin */
+}
+
+/* Input ve Textarea için genel stiller */
+.jobpost-container input[type="text"],
+.jobpost-container input[type="date"],
+.jobpost-container textarea {
+  width: 100%;
+  padding: 14px 18px; /* Padding artırıldı */
+  border: 1px solid rgba(255, 255, 255, 0.25); /* Kenarlık biraz daha belirgin */
+  border-radius: 10px;
+  font-size: 16px; /* Font boyutu artırıldı */
+  font-family: inherit;
+  background-color: rgba(255, 255, 255, 0.12); /* Arka plan biraz daha belirgin */
+  color: #FFFFFF;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  resize: vertical; /* Sadece textarea için geçerli olacak ama burada genel tanım */
+}
+
+/* Placeholder stilleri */
+.jobpost-container input[type="text"]::placeholder,
+.jobpost-container textarea::placeholder {
+  color: #A0AEC0; /* Diğer sayfalardaki placeholder rengi */
+  opacity: 0.8; /* Biraz daha soluk */
+}
+
+/* Date input için özel düzenlemeler */
+.jobpost-container input[type="date"] {
+    color-scheme: dark; /* Tarayıcının tarih seçicisini koyu temaya uydurur */
+    min-height: 53px; /* Diğer inputlarla aynı yüksekliği sağlamak için (padding + border) */
+}
+/* Firefox'ta date input placeholder'ı stilize etmek zordur, genellikle tarayıcı varsayılanını kullanır */
+
+
+/* Focus durumu */
+.jobpost-container input[type="text"]:focus,
+.jobpost-container input[type="date"]:focus,
+.jobpost-container textarea:focus {
+  outline: none;
+  border-color: #82E0AA; /* Vurgu rengi */
+  background-color: rgba(255, 255, 255, 0.18); /* Focus'ta arka plan biraz daha aydınlık */
+  box-shadow: 0 0 0 2px rgba(130, 224, 170, 0.3); /* Hafif dış gölge */
+}
+
+.jobpost-container textarea {
+  min-height: 120px; /* Textarea için minimum yükseklik */
+}
+
+/* Butonlar */
+.jobpost-buttons {
+  margin-top: 30px; /* Formun en altında daha fazla boşluk */
+  display: flex;
+  gap: 18px; /* Butonlar arası boşluk artırıldı */
+}
+
+.jobpost-buttons button {
+  cursor: pointer;
+  font-size: 16px;
+  padding: 12px 25px; /* Buton padding artırıldı */
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+  flex-grow: 1;
+  display: flex; /* İkon ve metni ortalamak için */
+  align-items: center;
+  justify-content: center;
+}
+.jobpost-buttons button svg { /* Buton içindeki ikonlar için */
+    margin-right: 8px;
+}
+
+
+.jobpost-button-update {
+  background-color: #82E0AA;
+  color: #1D2B4A;
+  box-shadow: 0 2px 4px rgba(130, 224, 170, 0.2);
+}
+.jobpost-button-update:hover:not(:disabled) {
+  background-color: #6cc091;
+  transform: translateY(-2px);
+}
+
+.jobpost-button-delete {
+  background-color: #E74C3C;
+  color: white;
+  box-shadow: 0 2px 4px rgba(231, 76, 60, 0.2);
+}
+.jobpost-button-delete:hover:not(:disabled) {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+}
+.jobpost-buttons button:disabled {
+    background-color: #A0AEC0 !important; /* !important gerekebilir */
+    color: #708090 !important;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+
+/* Başvuranlar Listesi */
+.applicants-list li {
+    /* ... (mevcut li stilleri aynı kalabilir) ... */
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 15px 18px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+    line-height: 1.2;
+    position: relative; /* Durum rengi için gerekirse */
+}
+
+/* Duruma göre kenarlık veya arka plan rengi (isteğe bağlı) */
+.applicants-list li.status-pending {
+    border-left: 5px solid #f0b500;
+}
+.applicants-list li.status-accepted {
+    border-left: 5px solid #82E0AA;
+}
+.applicants-list li.status-rejected {
+    border-left: 5px solid #E74C3C;
+}
+
+
+.applicant-email-link {
+    color: #82E0AA;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.applicant-email-link:hover {
+    color: #9CF0C1;
+    text-decoration: underline;
+}
+
+.applicant-cover-letter {
+    color: #A0AEC0;
+    display: block; /* Tam satır kaplasın */
+    margin-top: 8px;
+    font-size: 0.9em;
+}
+
+.applicant-apply-date {
+    color: #A0AEC0;
+    font-size: 0.85em;
+    display: block;
+    margin-top: 2px;
+}
+
+.applicant-status-container {
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+.applicant-status-text {
+    font-size: 0.95em;
+}
+
+/* Farklı durumlar için metin renkleri (ikon renkleri JS'de ayarlandı) */
+.applicant-status-text.status-pending {
+    color: #f0b500;
+}
+.applicant-status-text.status-accepted {
+    color: #82E0AA;
+}
+.applicant-status-text.status-rejected {
+    color: #E74C3C;
+}

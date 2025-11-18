@@ -1,83 +1,152 @@
+/* HeaderBar.css */
 .headerBar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 70px;
-    width: 100%;
-    background-color: #283958;
+  position: fixed; /* Sayfanın en üstüne sabitlenir */
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px; /* Yükseklik */
+  width: 100%;
+  background-color: #283958; /* Koyu ana renk */
+  display: flex;
+  justify-content: space-between; /* Öğeleri uçlara yasla */
+  align-items: center;
+  padding: 0 25px; /* Yanlardan boşluk */
+  z-index: 1000; /* Diğer öğelerin üzerinde kalması için */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Hafif gölge */
+}
+
+.header-left { /* Logo ve kullanıcı adı için sol taraf */
+  display: flex;
+  align-items: center;
+}
+
+.header-logoText {
+  font-size: 28px; /* Biraz daha küçük logo */
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  font-family: 'Arial', sans-serif-condensed;
+  text-decoration: none; /* Link ise alt çizgiyi kaldır */
+}
+
+.header-internText {
+  color: #f0b500;
+  font-style: italic;
+}
+
+.header-aiText {
+  color: #E0E0E0;
+}
+
+.header-userText {
+  margin-left: 20px;
+  font-size: 16px;
+  color: #B0B0B0; /* Daha soluk kullanıcı adı */
+  white-space: nowrap; /* Uzun isimler için taşmayı engelle */
+  font-weight: 500;
+}
+
+.header-right { /* İkonlar için sağ taraf */
+  display: flex;
+  align-items: center;
+}
+
+/* Drawer (sağdan açılan menü) stilleri */
+.drawer-container {
+  width: 280px; /* Drawer genişliği */
+  padding: 25px 20px;
+  height: 100%;
+  background-color: #1D2B4A; /* Drawer için daha koyu bir arka plan */
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Öğeler arası boşluk */
+  color: #E0E0E0;
+}
+
+.drawer-header { /* Kullanıcı bilgileri için başlık */
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
-    z-index: 1000;
-  }
-  
-  .logoText {
-    font-size: 30px;
-    font-weight: bold;
-    text-align: center;
-    margin-left: 50px;
-  }
-  
-  .internText {
-    color: #f0b500;
-    font-style: italic;
-  }
-  
-  .aiText {
-    color: #e2e2e2;
-  }
-  
-  .logoWrapper {
-    display: flex;
-    align-items: center;
-  }
-  
-  .userText {
-    margin-left: 50px;
-    font-size: 18px;
-    color: #ffffff;
-    white-space: nowrap;
-  }
-  .drawer-container {
-    width: 250px;
-    padding: 20px;
-    height: 100%;
-    background-color: #667eea;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  
-  .drawer-title {
-    color: #e2e2e2;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .drawer-list {
-    list-style: none;
-    padding: 0;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.drawer-avatar {
+    font-size: 36px !important; /* MUI ikon boyutu */
+    color: #82E0AA;
+    margin-right: 15px;
+}
+.drawer-user-info p {
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .drawer-link {
-    display: block;
-    padding: 10px 15px;
-    background-color: #5a67d8;
-    border-radius: 8px;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    font-weight: 500;
-    transition: background-color 0.3s;
-  }
-  
-  .drawer-link:hover {
-    background-color: #4c51bf;
-  }
-  
+    line-height: 1.4;
+}
+.drawer-user-name {
+    font-size: 17px;
+    font-weight: 600;
+    color: #ffffff;
+}
+.drawer-user-email {
+    font-size: 14px;
+    color: #B0B0B0;
+}
+
+
+.drawer-title { /* "Menü" başlığı için - artık kullanılmıyor olabilir */
+  color: #E0E0E0;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.drawer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.drawer-link {
+  display: flex; /* İkon ve metin için */
+  align-items: center; /* Dikeyde ortala */
+  padding: 12px 18px;
+  background-color: transparent; /* Şeffaf arka plan */
+  border-radius: 10px;
+  color: #E0E0E0; /* Açık metin rengi */
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  font-size: 16px;
+}
+.drawer-link .MuiSvgIcon-root { /* MUI ikonları için */
+    margin-right: 15px;
+    font-size: 22px;
+    color: #82E0AA; /* Vurgu rengi */
+}
+
+.drawer-link:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Hover'da hafif vurgu */
+  color: #FFFFFF;
+}
+
+.drawer-link.active-link { /* Aktif sayfa linki */
+    background-color: #4b6cb7; /* Açık ana renk */
+    color: #FFFFFF;
+    font-weight: 600;
+}
+.drawer-link.active-link .MuiSvgIcon-root {
+    color: #FFFFFF;
+}
+
+
+/* Material UI IconButton stillerini override etmek gerekebilir */
+.headerBar .MuiIconButton-root {
+  padding: 8px; /* İkon butonları için padding */
+}
+.headerBar .MuiSvgIcon-root {
+  color: #E0E0E0; /* İkon rengi */
+  font-size: 28px; /* İkon boyutu */
+}
+.headerBar .MuiIconButton-root:hover .MuiSvgIcon-root {
+    color: #FFFFFF; /* Hover'da daha parlak ikon */
+}

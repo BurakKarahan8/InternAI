@@ -1,0 +1,136 @@
+/* UserApplications.css */
+.user-applications-page-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #283958, #4b6cb7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 70px; /* HeaderBar için */
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  color: #E0E0E0;
+}
+
+.user-applications-container {
+  width: 100%;
+  max-width: 900px; /* Kartlar için uygun genişlik */
+  margin-top: 30px;
+  padding: 20px; /* Mobil için kenarlarda daha az boşluk */
+}
+
+.user-applications-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #FFFFFF;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.applications-list-grid { /* Kartları göstermek için grid */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Responsive grid */
+    gap: 25px;
+}
+
+.application-card {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 20px 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  transition: transform 0.2s ease;
+}
+.application-card:hover {
+    transform: translateY(-4px);
+}
+
+.app-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 8px;
+}
+
+.app-card-company {
+  font-size: 1rem;
+  color: #f0b500; /* Şirket adı için vurgu */
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+.app-card-company svg {
+    margin-right: 6px;
+    vertical-align: middle; /* İkonu metinle hizala */
+}
+
+.app-card-info {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: #B0B0B0;
+  display: flex; /* İkon ve metin yan yana */
+  align-items: center;
+  line-height: 1.5;
+}
+.app-card-info svg { /* İkonlar için genel stil */
+    margin-right: 8px;
+    font-size: 16px; /* İkon boyutu */
+    color: #82E0AA; /* Vurgu rengi */
+}
+
+.app-card-info strong {
+  color: #E0E0E0;
+  font-weight: 500;
+}
+
+.app-status {
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    display: inline-block; /* Sadece metin kadar yer kaplasın */
+}
+.app-status-PENDING { background-color: rgba(240, 181, 0, 0.2); color: #f0b500; }
+.app-status-APPROVED { background-color: rgba(130, 224, 170, 0.2); color: #82E0AA; }
+.app-status-REJECTED { background-color: rgba(231, 76, 60, 0.2); color: #E74C3C; }
+
+.app-cover-letter {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+.app-cover-letter p {
+    font-size: 0.85rem;
+    color: #A0AEC0;
+    line-height: 1.6;
+    max-height: 60px; /* Ön yazı için maksimum yükseklik */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Çok satırlı kesme için display: -webkit-box gerekebilir ama basit overflow yeterli olabilir */
+}
+.app-cover-letter strong {
+    color: #B0B0B0;
+}
+
+
+.loading-message-apps,
+.error-message-apps,
+.no-applications-message-apps {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-top: 50px;
+  color: #B0B0B0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+.loading-message-apps svg,
+.error-message-apps svg,
+.no-applications-message-apps svg {
+    font-size: 40px;
+    margin-bottom: 15px;
+    color: #82E0AA;
+}
+.error-message-apps { color: #E74C3C; }
+.error-message-apps svg { color: #E74C3C; }

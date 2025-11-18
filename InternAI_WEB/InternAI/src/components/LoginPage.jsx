@@ -1,67 +1,69 @@
+// LoginPage.js (Kullanıcı)
 import React, { useState } from "react";
-import "./LoginPage.css";
+import "./LoginPage.css"; // Ortak CSS
 import { Link, useNavigate } from "react-router-dom";
-import { FaUser, FaLock } from "react-icons/fa";
+// react-icons yerine @expo/vector-icons benzeri bir kütüphane veya SVG kullanmak daha tutarlı olabilir
+// Şimdilik react-icons ile devam edelim, mobilde Ionicons kullanmıştık.
+import { FaUserAlt, FaLock } from "react-icons/fa"; // react-icons
+// VEYA Material UI ikonları (HeaderBar'da kullanılmış)
+// import EmailIcon from '@mui/icons-material/Email';
+// import LockIcon from '@mui/icons-material/Lock';
 
 const LoginPage = () => {
-  const [email, setEmail] = useState(""); // Kullanıcıdan alınan email
-  const [password, setPassword] = useState(""); // Kullanıcıdan alınan şifre
-
-  const navigate = useNavigate(); // React Router'dan yönlendirme için
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false); // Yükleme durumu
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault(); // Formun varsayılan davranışını engelle
+    e.preventDefault();
     if (!email || !password) {
       alert("Lütfen tüm alanları doldurun.");
       return;
     }
-
+    setLoading(true);
     try {
       const response = await fetch("http://localhost:8080/api/users/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
       });
-
       const data = await response.json();
-
       if (response.ok) {
-        // Giriş başarılı
-        alert("Giriş başarılı. Hoş geldiniz, " + `${data.fullName}` + "!");
-
-        navigate("/main", { state: { userdata: data } }); // Giriş başarılı olduğunda yönlendirme yap
+        // alert("Giriş başarılı. Hoş geldiniz, " + `${data.fullName}` + "!"); // Otomatik yönlendirme
+        navigate("/main", { state: { userdata: data } });
       } else {
-        // Giriş başarısız
-        alert(`Hata: ${data}`);
+        alert(`Giriş Hatası: ${data.message || data || "Bilgilerinizi kontrol edin."}`);
       }
     } catch (error) {
-      alert("Hata: Bir hata oluştu. Lütfen tekrar deneyin.");
+      alert("Sunucu Hatası: Bağlantı kurulamadı veya beklenmedik bir sorun oluştu.");
       console.error(error);
     }
+    setLoading(false);
   };
 
   return (
     <div className="login-container">
-      <div className="login-logoText">
-        <div className="login-internText">Intern</div>
-        <div className="login-aiText">AI</div>
+      <div className="login-logoText-wrapper"> {/* Wrapper eklendi */}
+        <div className="login-logoText">
+          <span className="login-internText">Intern</span>
+          <span className="login-aiText">AI</span>
+        </div>
+        <p className="login-tagline">Staj aramanın akıllı yolu</p> {/* Tagline eklendi */}
       </div>
       <div className="login-box">
-        <h2 className="login-title">Giriş Yap</h2>
+        <h2 className="login-title">Öğrenci Girişi</h2>
         <form onSubmit={handleLogin}>
           <div className="input-group">
-            <FaUser className="input-icon" />
+            {/* <EmailIcon className="input-icon" /> veya FaEnvelope */}
+            <FaUserAlt className="input-icon" />
             <input
               type="email"
               className="login-input"
-              placeholder="Emailinizi girin"
+              placeholder="E-posta adresiniz"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
           <div className="input-group">
@@ -69,24 +71,24 @@ const LoginPage = () => {
             <input
               type="password"
               className="login-input"
-              placeholder="Şifrenizi girin"
+              placeholder="Şifreniz"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
-          <button type="submit" className="login-button">
-            Giriş Yap
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? "Giriş Yapılıyor..." : "Giriş Yap"}
           </button>
-          <p className="login-footer">
-            Hesabınız yok mu?{" "}
+          <div className="login-footer"> {/* footer için div */}
+            Hesabınız yok mu?
             <Link to="/signup" className="signup-link">
               Kaydol
             </Link>
-          </p>
+          </div>
         </form>
       </div>
     </div>
   );
 };
-
 export default LoginPage;

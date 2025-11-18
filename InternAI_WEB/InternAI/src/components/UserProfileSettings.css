@@ -1,129 +1,162 @@
-/* Ana sayfa */
-.user-settings-page {
-    background: linear-gradient(to bottom right, #667eea, #764ba2);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 50px 0;
-    box-sizing: border-box;
-  }
-  
-  /* Profil ayarları kutusu */
-  .user-settings-container {
-    background-color: white;
-    padding: 40px 50px;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    margin: 50px;
-    min-height: 78vh;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    align-items: center;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  /* Form düzeni */
-  .user-settings-form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
+/* UserProfileSettings.css */
+.user-settings-page-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #283958, #4b6cb7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 70px; /* HeaderBar için */
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  color: #E0E0E0;
+}
 
-  .user-settings-info{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.user-settings-container {
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 30px 40px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  width: 100%;
+  max-width: 650px; /* Form için uygun genişlik */
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* İçeriği ortala */
+}
 
-  .user-settings-info-item{
-    display: flex;
-    flex-direction: row;
-  }
-  
-  /* Etiketler */
-  .user-settings-label {
+.user-settings-container h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.user-settings-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 22px; /* Form elemanları arası boşluk */
+}
+
+.form-section { /* Fotoğraf ve bilgiler için ayrı bölümler */
+    width: 100%;
+    padding: 20px;
+    background-color: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+.form-section-title {
     font-size: 18px;
-    margin-bottom: 10px;
-    color: #333;
-    line-height: 1.5;
-  }
-  
-  /* Input alanları */
-  .user-settings-form input {
-    font-size: 16px;
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 50%;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  /* Kaydet butonu */
-  .user-settings-save-button {
-    background-color: #667eea;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 5px;
+    font-weight: 500;
+    color: #E0E0E0;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+
+.user-settings-avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px; /* Alttaki butonla boşluk */
+}
+
+.user-settings-avatar-preview { /* .user-settings-avatar yerine */
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 3px solid #82E0AA;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.user-settings-file-input { /* Dosya seçme inputu */
+    background-color: rgba(255,255,255,0.1);
+    color: #E0E0E0;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px dashed rgba(255,255,255,0.3);
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    font-weight: 600;
-  }
-  
-  .user-settings-save-button:hover {
-    background-color: #564bb5;
-  }
-  
-  /* Profil fotoğrafı */
-  .user-settings-avatar {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-  }
-  
-  /* Avatar konteyneri */
-  .user-settings-avatar-container {
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    transition: background-color 0.2s;
+}
+.user-settings-file-input:hover {
+    background-color: rgba(255,255,255,0.15);
+}
+.user-settings-file-input::file-selector-button { /* Tarayıcıların kendi butonunu gizle/stille */
+    display: none; /* Veya özel stil */
+}
+
+
+.settings-input-group { /* Label ve input için */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 15px; /* Yatayda avatar ile input arasına boşluk ekledim */
-  }
-  
-  /* Avatar için input alanı */
-  .user-settings-avatar-container input {
-    margin-top: 10px;
-    font-size: 14px;
-    padding: 8px;
-  }
-  
-  /* Mobil uyumlu düzen */
-  @media (max-width: 670px) {
-    .user-settings-container {
-      margin: 20px;
-      padding: 20px;
-      min-height: 80vh;
-    }
-  
-    .user-settings-form {
-      align-items: center;
-    }
-  
-    .user-settings-avatar-container {
-      margin-bottom: 20px;
-    }
-  
-    .user-settings-avatar {
-      width: 120px;
-      height: 120px;
-    }
-  }
-  
+}
+
+.user-settings-label {
+  font-size: 15px;
+  color: #B0B0B0;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.user-settings-input, .user-settings-static-info {
+  font-size: 16px;
+  padding: 12px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+}
+ .user-settings-input::placeholder {
+    color: #A0AEC0;
+}
+.user-settings-input:focus {
+    outline: none;
+    border-color: #82E0AA;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+.user-settings-static-info { /* Email, username gibi değişmeyen alanlar */
+    background-color: rgba(0,0,0,0.1);
+    color: #A0AEC0;
+    cursor: not-allowed;
+}
+
+
+.user-settings-button { /* Genel buton stili */
+  background-color: #82E0AA;
+  color: #1D2B4A;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: 600;
+  width: 100%; /* Butonlar tam genişlikte */
+  max-width: 300px; /* Butonlar için maksimum genişlik */
+  align-self: center; /* Form içinde ortala */
+  box-shadow: 0 2px 4px rgba(130, 224, 170, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.user-settings-button svg {
+    margin-right: 8px;
+}
+.user-settings-button:hover {
+  background-color: #6cc091;
+  transform: translateY(-2px);
+}
+.user-settings-button:disabled {
+    background-color: #A0AEC0;
+    cursor: not-allowed;
+}

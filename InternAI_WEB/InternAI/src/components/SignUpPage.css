@@ -1,95 +1,135 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-}
-
-.App {
-    text-align: center;
-    padding: 20px;
-}
-
+/* SignUpPage.css (Kullanıcı ve Şirket Kayıt için Ortak) */
 .signup-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: linear-gradient(to right, #667eea, #764ba2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #283958, #4b6cb7);
+  flex-direction: column;
+  padding: 20px;
+}
+
+.signup-logoText-wrapper { 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.signup-logoText {
+  font-size: clamp(35px, 8vw, 60px); 
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  font-family: 'Arial', sans-serif-condensed;
+}
+
+.signup-internText {
+  color: #f0b500;
+  font-style: italic;
+}
+
+.signup-aiText {
+  color: #E0E0E0;
+}
+
+.signup-tagline {
+  font-size: clamp(15px, 2.5vw, 17px);
+  color: #B0B0B0;
+  text-align: center;
+  margin-top: 8px;
 }
 
 .signup-box {
-    width: 100%;
-    max-width: 380px;
-    padding: 40px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    text-align: center;
+  width: 100%;
+  max-width: 420px; /* Kayıt formu biraz daha geniş olabilir */
+  padding: 30px 35px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  text-align: center;
 }
 
 .signup-title {
-    font-size: 28px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 20px;
+  font-size: 24px; /* Biraz daha küçük başlık */
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 25px;
 }
 
+/* Input-group, input-icon, signup-input LoginPage.css'deki gibi olacak */
 .input-group {
-    display: flex;
-    align-items: center;
-    background: #f1f1f1;
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  margin-bottom: 18px; /* Inputlar arası boşluk */
+  height: 55px;
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease;
 }
-
+.input-group:focus-within {
+    border-color: #82E0AA;
+}
 .input-icon {
-    font-size: 18px;
-    color: #667eea;
-    margin-right: 10px;
+  font-size: 20px; /* Kayıt için ikonlar biraz daha küçük */
+  color: #82E0AA;
+  margin-left: 15px;
+  margin-right: 10px;
+}
+.signup-input { /* .login-input ile aynı */
+  flex: 1;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 16px;
+  color: #ffffff;
+  padding-right: 15px;
+}
+.signup-input::placeholder {
+  color: #d3d3d3;
 }
 
-.signup-input {
-    flex: 1;
-    border: none;
-    outline: none;
-    background: none;
-    font-size: 16px;
-}
-
+/* signup-button LoginPage.css'deki login-button gibi olacak */
 .signup-button {
-    width: 100%;
-    padding: 12px;
-    background: #667eea;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    margin-top: 10px;
+  width: 100%;
+  padding: 15px;
+  background-color: #82E0AA;
+  color: #1D2B4A;
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 15px; /* Buton üst boşluğu */
+  box-shadow: 0 3px 5px rgba(130, 224, 170, 0.3);
 }
-
 .signup-button:hover {
-    background: #564fb1;
+  background-color: #6cc091;
+  transform: translateY(-2px);
+}
+.signup-button:disabled {
+    background-color: #A0AEC0;
+    cursor: not-allowed;
 }
 
+/* signup-footer LoginPage.css'deki login-footer gibi olacak */
 .signup-footer {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #666;
+  margin-top: 20px;
+  font-size: 15px;
+  color: #B0B0B0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-.login-link {
-    color: #667eea;
-    text-decoration: none;
-    font-weight: bold;
+.login-link { /* Linkler için ortak stil */
+  color: #82E0AA;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 5px;
 }
-
 .login-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }

@@ -1,76 +1,105 @@
+/* LandingPage.css */
 .landing-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(to right, #667eea, #764ba2);
+  background: linear-gradient(135deg, #283958, #4b6cb7);
   flex-direction: column;
   text-align: center;
-  color: white;
+  color: #E0E0E0; /* Açık metin rengi */
+  padding: 20px; /* Mobil görünüm için padding */
 }
 
-.logoText {
-  font-size: 50px;
+.landing-logoText { /* Logo için ayrı bir stil */
+  font-size: clamp(40px, 10vw, 70px); /* Responsive font boyutu */
   font-weight: bold;
-  margin-bottom: 40px;
-  display: flex;
+  margin-bottom: 30px;
+  display: flex; /* Intern ve AI yan yana */
   align-items: center;
   justify-content: center;
+  font-family: 'Arial', sans-serif-condensed; /* Mobil ile uyumlu font */
 }
 
-.internText {
+.landing-internText { /* Logo için ayrı bir stil */
   color: #f0b500;
   font-style: italic;
 }
 
-.aiText {
-  color: #e2e2e2;
+.landing-aiText { /* Logo için ayrı bir stil */
+  color: #E0E0E0;
 }
 
 .landing-content {
   max-width: 600px;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  padding: 30px 40px;
+  /* YENİ: Hafif şeffaf bir kart görünümü */
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px); /* Arka planı bulanıklaştırma (destekleyen tarayıcılarda) */
 }
 
 .landing-title {
-  font-size: 32px;
-  font-weight: 600;
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: 700; /* Daha kalın başlık */
   margin-bottom: 20px;
+  color: #FFFFFF; /* Beyaz başlık */
 }
 
 .landing-description {
-  font-size: 18px;
-  margin-bottom: 30px;
+  font-size: clamp(16px, 3vw, 18px);
+  margin-bottom: 35px;
+  color: #B0B0B0; /* Daha soluk açıklama metni */
+  line-height: 1.6;
 }
 
 .button-container {
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  flex-direction: column; /* Mobil için butonlar alt alta */
+  align-items: center;
+  gap: 18px;
 }
 
 .landing-button {
-  padding: 15px 30px;
-  font-size: 18px;
+  padding: 14px 28px;
+  font-size: 17px;
   font-weight: 600;
-  background-color: #667eea;
-  color: white;
-  border-radius: 8px;
+  color: #FFFFFF; /* Beyaz buton metni */
+  border-radius: 12px;
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%; /* Butonlar tam genişlikte */
+  max-width: 300px; /* Maksimum genişlik */
+  border: 1px solid transparent; /* Kenarlık için yer aç */
 }
 
-.landing-button:hover {
-  background-color: #564fb1;
+.landing-button.student-button { /* Kullanıcı girişi için farklı renk */
+  background-color: #4b6cb7; /* Açık vurgu */
+}
+.landing-button.student-button:hover {
+  background-color: #3a508a; /* Hover için biraz daha koyu */
+  transform: translateY(-2px);
 }
 
-.company-button {
-  background-color: #f0b500;
+.landing-button.company-button { /* Şirket girişi için farklı renk */
+  background-color: transparent;
+  border: 1px solid #f0b500; /* Mobil temadaki sarı */
+  color: #f0b500;
 }
 
-.company-button:hover {
-  background-color: #c89f00;
+.landing-button.company-button:hover {
+  background-color: rgba(240, 181, 0, 0.1); /* Hafif sarı hover */
+  transform: translateY(-2px);
+}
+
+/* Responsive ayarlar */
+@media (min-width: 600px) {
+  .button-container {
+    flex-direction: row; /* Geniş ekranlarda yan yana */
+    justify-content: center;
+  }
+  .landing-button {
+    width: auto; /* Otomatik genişlik */
+  }
 }

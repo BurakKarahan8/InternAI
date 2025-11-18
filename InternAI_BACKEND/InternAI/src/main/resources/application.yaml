@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: InternAI
+
+  datasource:
+    url: jdbc:postgresql://aws-0-eu-central-1.pooler.supabase.com:5432/postgres
+    username: postgres.ohdnxxuzfudpyocbfeok
+    password: burak-1234
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          batch_size: 300
+        order_inserts: true
+        order_updates: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: internapp.ai@gmail.com
+    password: gscwogjgmcobnhsr
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+github:
+  token: ${GITHUB_TOKEN}

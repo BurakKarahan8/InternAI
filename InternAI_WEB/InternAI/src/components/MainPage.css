@@ -1,56 +1,215 @@
-.gradient {
-    background: linear-gradient(to bottom right, #667eea, #764ba2);
-    min-height: 100vh;
-    padding-bottom: 40px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .header {
-    padding-top: 80px;
-    font-size: 24px;
-    font-weight: bold;
-    margin: 30px 0 20px 0;
-    text-align: center;
-    color: white;
-  }
-  
-  .cardList {
-    margin-top: 40px;
+/* MainPage.css */
+.main-page-gradient { /* Ana sarmalayıcı için yeni sınıf */
+  background: linear-gradient(135deg, #283958, #4b6cb7);
+  min-height: 100vh; /* HeaderBar yüksekliğini hesaba kat */
+  padding-top: 70px; /* HeaderBar için boşluk */
+  display: flex; /* Sidebar ve content için flex */
+  color: #E0E0E0;
+}
+
+.main-content-wrapper { /* Sidebar ve content'i saran div */
+    display: flex;
+    flex-grow: 1; /* Kalan alanı kapla */
+    width: 100%;
+    max-width: 1700px; /* Maksimum genişlik */
+    margin: 0 auto; /* Ortala */
+    padding: 20px;
+}
+
+.sidebar {
+  width: 250px; /* Sidebar genişliği */
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.05); /* Hafif şeffaf */
+  border-radius: 12px;
+  margin-right: 20px;
+  height: fit-content; /* İçeriğe göre yükseklik, sticky için */
+  position: sticky; /* Kaydırma ile sabit kalır */
+  top: 90px; /* HeaderBar + biraz boşluk */
+}
+
+.sidebar h3 {
+  color: #FFFFFF;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tech-list {
+  list-style: none;
+  padding: 0;
+  max-height: 400px; /* Çok fazla teknoloji varsa kaydırma */
+  overflow-y: auto;
+}
+/* Kaydırma çubuğu stilleri (isteğe bağlı) */
+.tech-list::-webkit-scrollbar { width: 6px; }
+.tech-list::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 3px;}
+.tech-list::-webkit-scrollbar-thumb { background: #82E0AA; border-radius: 3px;}
+.tech-list::-webkit-scrollbar-thumb:hover { background: #6cc091; }
+
+
+.tech-item {
+  padding: 10px 12px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #E0E0E0;
+  transition: background-color 0.2s, color 0.2s;
+  font-size: 14px;
+}
+
+.tech-item:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.tech-item.active {
+  background-color: #82E0AA; /* Mobil tema vurgu */
+  color: #1D2B4A; /* Koyu metin */
+  font-weight: 600;
+}
+
+.clear-button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #E74C3C; /* Kırmızı temizle butonu */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  width: 100%;
+  transition: background-color 0.2s;
+}
+.clear-button:hover {
+  background-color: #c0392b;
+}
+
+.content {
+  flex: 1; /* Kalan alanı kaplar */
+  padding-left: 10px; /* Sidebar ile arasında boşluk */
+}
+
+.main-header { /* "Mevcut Staj İlanları" başlığı */
+  font-size: 26px;
+  font-weight: 700;
+  text-align: left; /* Sola yaslı başlık */
+  color: white;
+  margin-bottom: 25px;
+}
+
+.cardList {
+  display: grid; /* Kartları grid ile diz */
+  grid-template-columns: repeat(auto-fill, minmax(335px, 1fr)); /* Responsive grid */
+  gap: 20px; /* Kartlar arası boşluk */
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.08); /* Şeffaf kart */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column; /* İçerik alt alta */
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Hafif kenarlık */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-title { /* .title sınıfı için */
+  font-size: 1.3rem;
+  font-weight: 600; /* Daha kalın başlık */
+  color: #FFFFFF;
+  margin-bottom: 8px;
+}
+
+.card-company { /* .company sınıfı için */
+  font-size: 0.95rem;
+  color: #f0b500; /* Şirket adı için vurgu */
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.card-description { /* .description sınıfı için */
+  font-size: 0.9rem;
+  color: #B0B0B0;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  flex-grow: 1; /* Açıklamanın kalan alanı doldurması için */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-clamp: 3; /* En fazla 3 satır göster */
+  box-orient: vertical;
+}
+.card-technologies-label {
+    font-size: 0.9rem;
+    color: #E0E0E0;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.card-tech-container { /* Teknolojileri saran div */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.card-tech-badge { /* .tech-badge sınıfı için */
+  background-color: rgba(130, 224, 170, 0.2); /* Hafif vurgu */
+  color: #82E0AA; /* Vurgu rengi metin */
+  padding: 5px 10px;
+  border-radius: 15px; /* Tamamen yuvarlak */
+  font-size: 0.75rem; /* Daha küçük badge */
+  font-weight: 500;
+}
+
+.card-footer { /* Lokasyon ve deadline için */
+    margin-top: auto; /* Kartın en altına iter */
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #A0AEC0;
+}
+.card-footer-item {
+    display: flex;
+    align-items: center;
+}
+.card-footer-item svg { /* React-icons için */
+    margin-right: 6px;
+    font-size: 15px;
+}
+
+.card-location, /* .location sınıfı için */
+.card-deadline { /* .deadline sınıfı için */
+  font-size: 0.85rem;
+  color: #A0AEC0;
+}
+.card-deadline strong { color: #FFAB91; } /* Deadline için farklı renk */
+
+.loading-message, .empty-message {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-  }
-  
-  .card {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 20px;
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #B0B0B0;
+    min-height: 300px; /* İçerik yokken bile alan kaplasın */
+}
+.loading-message svg, .empty-message svg { /* İkonlar için */
+    font-size: 40px;
     margin-bottom: 15px;
-    width: 90%;
-    max-width: 600px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-    cursor: pointer;
-  }
-  
-  .card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .title {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .company {
-    font-size: 16px;
-    color: #555;
-  }
-  
-  .location {
-    font-size: 14px;
-    color: #666;
-  }
-  
-  
+    color: #82E0AA;
+}

@@ -1,34 +1,178 @@
-.company-dashboard {
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9f9f9;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+/* CompanyDashboard.css */
+.company-dashboard-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #283958, #4b6cb7);
+  padding-top: 70px; /* HeaderBar için */
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  color: #E0E0E0;
 }
 
-.company-dashboard h1 {
-  font-size: 28px;
-  margin-bottom: 30px;
-  color: #2c3e50;
-  text-align: center;
+.company-dashboard-container {
+  display: flex;
+  flex-direction: column; /* Mobil için alt alta */
+  gap: 30px;
+  padding: 25px;
+  max-width: 1400px;
+  margin: 20px auto 0 auto; /* Üstten boşluk ve ortala */
+}
+
+@media (min-width: 992px) { /* Geniş ekranlarda yan yana */
+  .company-dashboard-container {
+    flex-direction: row;
+  }
 }
 
 .dashboard-section {
-  margin-bottom: 40px;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  border: 1px solid #e0e0e0;
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.08); /* Şeffaf kart */
+  border-radius: 15px;
+  padding: 25px 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
 }
 
 .dashboard-section h2 {
   font-size: 22px;
-  margin-bottom: 15px;
-  color: #34495e;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 8px;
+  margin-bottom: 25px;
+  color: #FFFFFF;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 12px;
+}
+
+/* Form Elemanları için Genel Stiller */
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  font-size: 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #A0AEC0;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #82E0AA;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px; /* Açıklama için daha uygun yükseklik */
+}
+
+.date-input-company { /* Tarih inputu için özel stil gerekebilir */
+    color-scheme: dark; /* Tarayıcının tarih seçicisini koyu temaya uydurur */
+}
+
+.dashboard-button {
+  background-color: #82E0AA;
+  color: #1D2B4A;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 16px;
+  margin-top: 10px; /* Diğer elemanlarla boşluk */
+  width: 100%; /* Buton tam genişlikte olabilir */
+  box-shadow: 0 3px 5px rgba(130, 224, 170, 0.3);
+}
+
+.dashboard-button:hover {
+  background-color: #6cc091;
+  transform: translateY(-2px);
+}
+.dashboard-button:disabled {
+    background-color: #A0AEC0;
+    cursor: not-allowed;
 }
 
 
+/* İlan Kartları */
+.job-post-list { /* İlanları saran div */
+    max-height: 500px; /* Çok fazla ilan varsa kaydırma */
+    overflow-y: auto;
+    padding-right: 10px; /* Kaydırma çubuğu için boşluk */
+}
+.job-post-list::-webkit-scrollbar { width: 6px; }
+.job-post-list::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 3px;}
+.job-post-list::-webkit-scrollbar-thumb { background: #82E0AA; border-radius: 3px;}
+
+.job-post-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 18px;
+  margin-bottom: 15px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.job-post-card:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-3px);
+}
+
+.job-post-card h4 {
+  margin: 0 0 8px;
+  color: #FFFFFF;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.job-post-card p {
+  margin: 0 0 6px;
+  color: #B0B0B0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-clamp: 2;
+  box-orient: vertical;
+}
+
+.job-post-card small {
+  color: #A0AEC0;
+  font-size: 0.8rem;
+}
+
+.job-post-actions { /* Silme butonu için */
+    margin-top: 10px;
+    text-align: right;
+}
+.delete-job-button {
+    background-color: transparent;
+    color: #E74C3C;
+    border: 1px solid #E74C3C;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+.delete-job-button:hover {
+    background-color: #E74C3C;
+    color: white;
+}
+
+.empty-job-list {
+    text-align: center;
+    padding: 20px;
+    color: #B0B0B0;
+    font-size: 1rem;
+}

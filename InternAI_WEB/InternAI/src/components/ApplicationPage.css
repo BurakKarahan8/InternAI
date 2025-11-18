@@ -1,0 +1,145 @@
+/* ApplicationPage.css */
+.application-container-wrapper { /* Yeni dış sarmalayıcı */
+  background: linear-gradient(135deg, #283958, #4b6cb7);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; /* HeaderBar ve içerik için */
+  align-items: center;
+  padding-top: 70px; /* HeaderBar için */
+  padding-bottom: 40px;
+  box-sizing: border-box;
+}
+
+.application-page-content { /* Asıl içerik alanı */
+  width: 100%;
+  max-width: 650px; /* Form için uygun genişlik */
+  margin-top: 30px; /* Header'dan sonra boşluk */
+  padding: 35px 40px;
+  background: rgba(255, 255, 255, 0.08); /* Şeffaf kart */
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  color: #E0E0E0;
+}
+
+.application-page-content h2 {
+  margin-bottom: 15px;
+  font-weight: 700;
+  font-size: 26px;
+  text-align: center;
+  color: #FFFFFF; /* Beyaz başlık */
+}
+.application-page-content .job-details { /* İlan detayları için ayrı bir bölüm */
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.application-page-content .job-details p {
+  margin-bottom: 8px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #B0B0B0; /* Soluk metin */
+}
+
+.application-page-content .job-details strong {
+  color: #E0E0E0; /* Biraz daha parlak */
+  font-weight: 600;
+}
+
+.application-form { /* Form için sınıf */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.applicant-info-display { /* Başvuran bilgileri */
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.applicant-info-display p {
+    margin-bottom: 6px;
+    font-size: 15px;
+    color: #E0E0E0;
+}
+.applicant-info-display p:last-child {
+    margin-bottom: 0;
+}
+ .applicant-info-display strong {
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+
+.application-form label {
+  font-weight: 600;
+  font-size: 16px;
+  color: #E0E0E0; /* Açık etiket rengi */
+  margin-bottom: 6px;
+  display: block;
+}
+
+.application-form textarea {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Hafif kenarlık */
+  border-radius: 10px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  color: #FFFFFF; /* Beyaz metin */
+  background-color: rgba(255, 255, 255, 0.1); /* Şeffaf input arka planı */
+  resize: vertical;
+  min-height: 150px; /* Daha uzun textarea */
+}
+
+.application-form textarea::placeholder {
+  color: #A0AEC0;
+}
+
+.application-form textarea:focus {
+  border-color: #82E0AA; /* Mobil tema vurgu */
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.application-submit-button { /* Buton için yeni sınıf */
+  background-color: #82E0AA; /* Mobil tema vurgu */
+  color: #1D2B4A; /* Koyu metin */
+  font-weight: 700;
+  font-size: 17px;
+  padding: 15px 0;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 3px 5px rgba(130, 224, 170, 0.3);
+}
+
+.application-submit-button:hover {
+  background-color: #6cc091;
+  transform: translateY(-2px);
+}
+.application-submit-button:disabled {
+    background-color: #A0AEC0;
+    cursor: not-allowed;
+}
+
+.application-message { /* p.message için yeni sınıf */
+  margin-top: 25px;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  padding: 12px;
+  border-radius: 8px;
+}
+.application-message.success {
+    color: #1D2B4A;
+    background-color: #82E0AA; /* Başarı mesajı için vurgu */
+}
+.application-message.error {
+    color: #FFFFFF;
+    background-color: #E74C3C; /* Hata mesajı için kırmızı */
+}

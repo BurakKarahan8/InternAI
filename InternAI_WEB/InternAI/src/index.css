@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif; /* Tarayıcının/sistemin varsayılan sans-serif fontunu kullanır */
+  line-height: 1.6;
+  background-color: #1D2B4A; /* Önceki gradyan veya renkleriniz */
+  color: #E0E0E0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit; /* Linklerin varsayılan rengini üst elemandan alması için */
+}
