@@ -6,7 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons , MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 // Ekranları import et
 import LoginPage from '../components/LoginPage';
@@ -16,8 +16,9 @@ import CustomDrawerContent from '../components/CustomDrawerContent';
 import ProfileScreen from '../components/ProfileScreen';
 import SettingsScreen from '../components/SettingsScreen';
 import JobApplicationScreen from '../components/JobApplicationScreen';
-import MyApplicationsScreen from '../components/MyApplicationsScreen'; 
+import MyApplicationsScreen from '../components/MyApplicationsScreen';
 import AiAssistantScreen from '../components/AiAssistantScreen';
+import CvAnalysisScreen from '../components/CvAnalysisScreen';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -35,17 +36,18 @@ function MainBottomTabNavigator() {
 
           if (route.name === 'Stajlar') {
             iconName = focused ? 'briefcase' : 'briefcase-outline';
-          } else if (route.name === 'Başvurularım') { // YENİ EKLENDİ
+          } else if (route.name === 'Başvurularım') {
             iconName = focused ? 'document-text' : 'document-text-outline';
-          } else if (route.name === 'AI Asistan') { // YENİ EKLENDİ
-            IconComponent = MaterialCommunityIcons; // Farklı bir ikon seti
+          } else if (route.name === 'AI Asistan') {
+            IconComponent = MaterialCommunityIcons; 
             iconName = focused ? 'robot-happy' : 'robot-happy-outline';
           } else if (route.name === 'Profilim') {
             iconName = focused ? 'person-circle' : 'person-circle-outline';
           } else if (route.name === 'Ayarlar') {
             iconName = focused ? 'settings' : 'settings-outline';
+          } else if (route.name === 'CV Analizi') { 
+            iconName = focused ? 'bar-chart' : 'bar-chart-outline'; 
           }
-          
           // Android için size'ı biraz küçültebiliriz, iOS'ta default iyi duruyor genelde
           const iconSize = Platform.OS === 'android' ? size * 0.9 : size;
           return <IconComponent name={iconName} size={size} color={color} />;
@@ -66,11 +68,12 @@ function MainBottomTabNavigator() {
         },
       })}
     >
-      <Tab.Screen name="Stajlar" component={MainScreen} options={{ title: "Stajlar" }}/>
-      <Tab.Screen name="Başvurularım" component={MyApplicationsScreen} options={{ title: "Başvurularım" }}/>
-      <Tab.Screen name="AI Asistan" component={AiAssistantScreen} options={{ title: "AI Asistan" }}/>
-      <Tab.Screen name="Profilim" component={ProfileScreen} options={{ title: "Profilim" }}/>
-      <Tab.Screen name="Ayarlar" component={SettingsScreen} options={{ title: "Ayarlar" }}/>
+      <Tab.Screen name="Stajlar" component={MainScreen} options={{ title: "Stajlar" }} />
+      <Tab.Screen name="Başvurularım" component={MyApplicationsScreen} options={{ title: "Başvurularım" }} />
+      <Tab.Screen name="AI Asistan" component={AiAssistantScreen} options={{ title: "AI Asistan" }} />
+      <Tab.Screen name="CV Analizi" component={CvAnalysisScreen} options={{ title: "CV Analizi" }} />
+      <Tab.Screen name="Profilim" component={ProfileScreen} options={{ title: "Profilim" }} />
+      <Tab.Screen name="Ayarlar" component={SettingsScreen} options={{ title: "Ayarlar" }} />
     </Tab.Navigator>
   );
 }
@@ -81,18 +84,18 @@ function MainAppDrawer() {
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
-          drawerPosition: 'right',
-          headerShown: false,
-          drawerStyle: {
-             backgroundColor: '#f4f4f4',
-             width: 240,
-          }
+        drawerPosition: 'right',
+        headerShown: false,
+        drawerStyle: {
+          backgroundColor: '#f4f4f4',
+          width: 240,
+        }
       }}
     >
       <Drawer.Screen
-         name="MainTabs"
-         component={MainBottomTabNavigator}
-         options={{ title: 'Uygulama' }}
+        name="MainTabs"
+        component={MainBottomTabNavigator}
+        options={{ title: 'Uygulama' }}
       />
     </Drawer.Navigator>
   );
@@ -109,7 +112,8 @@ const AppNavigator = () => {
         <Stack.Screen name="Login" component={LoginPage} />
         <Stack.Screen name="SignUp" component={SignUpPage} />
         <Stack.Screen name="MainApp" component={MainAppDrawer} />
-        <Stack.Screen name="JobApplicationScreen" component={JobApplicationScreen}/>
+        <Stack.Screen name="JobApplicationScreen" component={JobApplicationScreen} />
+        <Stack.Screen name="CvAnalysis" component={CvAnalysisScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

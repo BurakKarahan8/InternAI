@@ -13,6 +13,7 @@ import ApplicationPage from './components/ApplicationPage';
 import UserApplications from './components/UserApplications';
 import JobPostDetail from './components/JobPostDetail';
 import AiAssistantPage from './components/AiAssistantPage';
+import CvAnalysis from './components/CvAnalysis';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/company-dashboard" element={<CompanyDashboard />} />
         <Route path="/main" element={<MainPage/>} />
         <Route path="/ai-assistant" element={<AiAssistantPage />} />
+        <Route path="/cv-analysis" element={<CvAnalysis />} />
         <Route path="/apply/:jobId" element={<ApplicationPage />} />
         <Route path="/user-profile" element={<UserProfilePage />} />
         <Route path="/user-settings" element={<UserProfileSettings />} />

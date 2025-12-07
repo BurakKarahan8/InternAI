@@ -1,0 +1,319 @@
+/* Genel Stil: UserProfileSettings.css'ten kopyalanmıştır */
+.analysis-page-wrapper {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #283958, #4b6cb7); /* Koyu Mavi Gradient */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 70px; 
+    padding-bottom: 40px;
+    box-sizing: border-box;
+    color: #E0E0E0;
+}
+
+.analysis-container {
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 30px 40px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    width: 100%;
+    max-width: 650px;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.analysis-container h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Form Bölümleri ve Başlıkları: UserProfileSettings.css'ten kopyalanmıştır */
+.user-settings-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.form-section { 
+    width: 100%;
+    padding: 20px;
+    background-color: rgba(255,255,255,0.05);
+    border-radius: 12px;
+}
+.form-section-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #E0E0E0;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+}
+.form-section-title svg {
+    margin-right: 8px;
+    color: #4299E1; /* Genel İkon Rengi */
+}
+.result-title svg {
+    color: #82E0AA; /* Sonuç Başlığı İkon Rengi */
+}
+
+
+/* CV Yükleme Alanı Stilleri */
+
+.upload-box {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.file-input-label { 
+    background-color: rgba(255,255,255,0.1);
+    color: #E0E0E0;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 2px dashed rgba(255,255,255,0.3);
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    transition: background-color 0.2s, border-color 0.2s;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.file-input-label:hover {
+    background-color: rgba(255,255,255,0.15);
+    border-color: #82E0AA;
+}
+.file-input-label svg {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.uploaded-file-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(130, 224, 170, 0.1); /* Hafif Yeşil Arkaplan */
+    border: 1px solid #82E0AA;
+    border-radius: 8px;
+    padding: 10px 15px;
+}
+.file-name-text {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 500;
+}
+.file-name-text .file-icon {
+    margin-right: 10px;
+    color: #82E0AA;
+    font-size: 1.1rem;
+}
+
+.remove-file-button {
+    background: none;
+    border: none;
+    color: #f56565; /* Kırmızı Kaldır İkonu */
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: color 0.2s;
+    flex-shrink: 0;
+}
+.remove-file-button:hover {
+    color: #e53e3e;
+}
+
+.no-data-message {
+    font-style: italic;
+    color: #A0AEC0;
+    font-size: 14px;
+    padding: 5px;
+}
+
+/* Analiz Butonu (Kullanıcı Ayarları Buton Stilini Kullanır) */
+.user-settings-button { 
+    /* UserProfileSettings.css'ten kopyalanmıştır */
+    background-color: #82E0AA;
+    color: #1D2B4A;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: 600;
+    width: 100%;
+    max-width: none; /* Tam genişlikte kullanıyoruz */
+    align-self: auto;
+    box-shadow: 0 2px 4px rgba(130, 224, 170, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.analyze-button {
+    margin-top: 10px;
+}
+.analyze-button:hover {
+    background-color: #6cc091;
+    transform: translateY(-1px);
+}
+.user-settings-button:disabled {
+    background-color: #718096 !important;
+    color: #d1d9e2 !important;
+    cursor: not-allowed;
+    transform: none;
+}
+.user-settings-button svg {
+    margin-right: 8px;
+}
+
+
+/* Sonuç Alanı Stilleri */
+
+.result-group { 
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed rgba(255,255,255,0.1);
+}
+.last-result-group {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.result-label {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 500;
+    color: #A0AEC0;
+    margin-bottom: 10px;
+}
+.result-label svg {
+    margin-right: 8px;
+    color: #9f7aea; /* Mor İkon */
+}
+
+
+/* Skor Stilleri */
+.score-group {
+    padding-top: 0;
+}
+.score-display {
+    display: flex;
+    align-items: stretch;
+    margin-top: 5px;
+}
+.score-value {
+    font-size: 56px;
+    font-weight: 900;
+    color: #4299E1;
+    margin-right: 20px;
+    text-shadow: 0 0 15px rgba(66, 153, 225, 0.6);
+}
+.score-message {
+    font-size: 17px;
+    margin-top: 25px;
+    color: #edf2f7;
+    line-height: 1.4;
+    font-weight: 400;
+    max-width: 80%;
+}
+
+
+/* Etiketler (Tags) */
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.result-tag {
+    background: #4a5568;
+    color: #edf2f7;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-block;
+    border: 1px solid #6c798b;
+}
+
+
+/* Progress Barlar */
+.language-progress-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 15px;
+}
+
+.lang-name {
+    font-size: 14px;
+    color: #edf2f7;
+    width: 120px; /* Daha fazla yer açıldı */
+    flex-shrink: 0;
+}
+
+.progress-bar-bg {
+    flex: 1;
+    height: 10px;
+    background: #4a5568;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: #9f7aea; /* Mor Dolgu Rengi */
+    border-radius: 5px;
+    transition: width 0.8s ease-out;
+}
+
+.lang-percentage {
+    font-size: 14px;
+    font-weight: bold;
+    color: #9f7aea;
+    width: 50px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+
+/* Responsive Düzenleme */
+@media (max-width: 600px) {
+    .analysis-container {
+        padding: 20px;
+        margin: 15px auto;
+    }
+    .score-display {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .score-value {
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+    .score-message {
+        font-size: 15px;
+        max-width: 100%;
+    }
+    .lang-name {
+        width: 80px;
+    }
+}

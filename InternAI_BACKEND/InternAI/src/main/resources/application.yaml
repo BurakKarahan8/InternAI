@@ -40,3 +40,8 @@ spring:
 
 github:
   token: ${GITHUB_TOKEN}
+
+gemini:
+  api:
+    key: AIzaSyB9GleI5hWLMs-udeTScjnkTEGJmu4OcWI
+    url: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=
