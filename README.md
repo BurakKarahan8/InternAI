@@ -17,8 +17,11 @@
 
 
 InternAI/
+
 ├── InternAI_WEB/ # Web uygulaması (React + Vite)
+
 ├── InternAI_MOBILE/ # Mobil uygulama (React Native + Expo)
+
 └── InternAI_BACKEND/ # Backend (Spring Boot)
 
 
@@ -69,17 +72,21 @@ InternAI/
 ## 🔧 1. Backend Kurulumu (InternAI_BACKEND)
 
 cd InternAI_BACKEND/InternAI
+
 ./mvnw clean install
 
-Veritabanı Ayarları
+### Veritabanı Ayarları
 
 application.properties:
 
 spring.datasource.url=jdbc:postgresql://localhost:5432/internai
+
 spring.datasource.username=your_username
+
 spring.datasource.password=your_password
 
 Backend'i Başlat
+
 ./mvnw spring-boot:run
 
 
@@ -87,7 +94,9 @@ Backend'i Başlat
 
 ## 🌐 2. Web Kurulum (InternAI_WEB)
 cd InternAI_WEB/InternAI
+
 npm install
+
 npm run dev
 
 
@@ -95,7 +104,9 @@ npm run dev
 
 ## 📱 3. Mobil Kurulum (InternAI_MOBILE)
 cd InternAI_MOBILE/InternAI
+
 npm install
+
 expo start
 
 
@@ -143,8 +154,11 @@ InternAI_BACKEND – Backend API (Spring Boot)
 
 ## 📂 Project Structure
 InternAI/
+
 ├── InternAI_WEB/
+
 ├── InternAI_MOBILE/
+
 └── InternAI_BACKEND/
 
 ✨ Features
@@ -212,12 +226,16 @@ cd InternAI_BACKEND/InternAI
 
 ./mvnw clean install
 
-Database Configuration
+### Database Configuration
+
 spring.datasource.url=jdbc:postgresql://localhost:5432/internai
+
 spring.datasource.username=your_username
+
 spring.datasource.password=your_password
 
 Start Backend
+
 ./mvnw spring-boot:run
 
 ➡️ http://localhost:8080
